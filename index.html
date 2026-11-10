@@ -49,30 +49,28 @@
 </head>
 <body>
  
- <main class="main-layout">
+ <main class="main-layout" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; max-width: 1400px; margin: 0 auto;">
 
   <!-- BANNER SINISTRO -->
-  <aside class="banner-box">
+  <aside class="banner-box" style="width: 160px; flex-shrink: 0;">
     <a href="https://www.tuosito-sponsor.it" target="_blank">
-      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="max-width: 100%; height: auto;">
+      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="width: 100%; height: auto; display: block;">
     </a>
   </aside>
 
-    <!-- Player Web TV (Collega il tuo canale YouTube) -->
-    <main>
-      <div class="player-container">
-        <!-- Sostituisci la scritta ID_DEL_TUO_CANALE con l'ID reale del tuo canale YouTube -->
-        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCPbX4AsXzcbJ-g8JUSfAmzg" allowfullscreen></iframe>
-      </div>
-    </main>
-
-    <!-- BANNER DESTRO -->
-  <aside class="banner-box">
-    <a href="https://www.tuosito-sponsor.it" target="_blank">
-      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="max-width: 100%; height: auto;">
-    </a>
-  </aside>
+  <!-- PLAYER VIDEO CENTRALE -->
+  <div class="video-container" style="flex-grow: 1; max-width: 960px;">
+    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCPbX4AsXzcbJ-g8JUSfAmzg" width="100%" height="540" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
+
+  <!-- BANNER DESTRO -->
+  <aside class="banner-box" style="width: 160px; flex-shrink: 0;">
+    <a href="https://www.tuosito-sponsor.it" target="_blank">
+      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="width: 100%; height: auto; display: block;">
+    </a>
+  </aside>
+
+</main>
 
 </body>
 </html>
