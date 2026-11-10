@@ -3,74 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Esaro TV - Live</title>
+  <title>Esaro TV - Web TV 24/7</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: #0f0f0f; color: #fff; font-family: sans-serif; }
-    .grid-tv {
-      display: grid;
-      grid-template-columns: 220px 1fr 220px;
-      gap: 15px;
-      padding: 15px;
-      max-width: 1500px;
-      margin: 0 auto;
-      min-height: 100vh;
-      align-items: center;
+    body {
+      margin: 0;
+      padding: 10px;
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
     }
-    .player-container {
+
+    /* LAYOUT PER COMPUTER (PC) */
+    .main-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 15px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .banner-box {
+      width: 160px;
+      flex-shrink: 0;
+    }
+
+    .banner-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .video-container {
+      flex-grow: 1;
+      max-width: 960px;
       position: relative;
-      padding-bottom: 56.25%; /* Formato 16:9 perfetto per i video */
+      padding-bottom: 56.25%; /* Rapporto 16:9 per il video */
       height: 0;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-      border-radius: 8px;
       overflow: hidden;
     }
-    .player-container iframe {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
-    .banner-box {
-      background: #181818;
-      border: 2px dashed #333;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 500px;
-      color: #777;
-      font-size: 14px;
-      text-align: center;
-      padding: 10px;
-    }
-    @media (max-width: 1000px) {
-      .grid-tv { grid-template-columns: 1fr; }
-      .banner-box { height: 150px; }
+
+    /* REGOLA PER CELLULARI E TABLET (Schermi sotto i 768px) */
+    @media (max-width: 768px) {
+      .main-layout {
+        flex-direction: column; /* Mette gli elementi uno sotto l'altro */
+        align-items: center;
+      }
+
+      .video-container {
+        width: 100%; /* Il video occupa tutta la larghezza dello smartphone */
+      }
+
+      .banner-box {
+        width: 100%;
+        max-width: 320px; /* I banner si ridimensionano sotto al video */
+        margin-top: 15px;
+      }
     }
   </style>
 </head>
 <body>
- 
- <main class="main-layout" style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; max-width: 1400px; margin: 0 auto;">
 
-  <!-- BANNER SINISTRO -->
-  <aside class="banner-box" style="width: 160px; flex-shrink: 0;">
-    <a href="https://www.tuosito-sponsor.it" target="_blank">
-      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="width: 100%; height: auto; display: block;">
-    </a>
-  </aside>
+  <main class="main-layout">
 
-  <!-- PLAYER VIDEO CENTRALE -->
-  <div class="video-container" style="flex-grow: 1; max-width: 960px;">
-    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCPbX4AsXzcbJ-g8JUSfAmzg" width="100%" height="540" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
+    <!-- BANNER SINISTRO (Su PC sta a sinistra, su mobile va sotto al video) -->
+    <aside class="banner-box">
+      <a href="https://www.tuosito-sponsor.it" target="_blank">
+        <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor">
+      </a>
+    </aside>
 
-  <!-- BANNER DESTRO -->
-  <aside class="banner-box" style="width: 160px; flex-shrink: 0;">
-    <a href="https://www.tuosito-sponsor.it" target="_blank">
-      <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor" style="width: 100%; height: auto; display: block;">
-    </a>
-  </aside>
+    <!-- PLAYER VIDEO CENTRALE -->
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/live_stream?channel=UCPbX4AsXzcbJ-g8JUSfAmzg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
-</main>
+    <!-- BANNER DESTRO (Su PC sta a destra, su mobile va in fondo) -->
+    <aside class="banner-box">
+      <a href="https://www.tuosito-sponsor.it" target="_blank">
+        <img src="Banner promo tv laterale.jpg" alt="Banner Sponsor">
+      </a>
+    </aside>
+
+  </main>
 
 </body>
 </html>
