@@ -186,14 +186,19 @@
       overflow: hidden;
       transition: border-color 0.2s, transform 0.2s;
     }
+    .ad-box-medium.ad-active {
+      border: 1px solid #2b406b;
+      background: #ffffff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
     .ad-box-medium:hover {
       border-color: var(--accent-cyan);
       transform: translateY(-2px);
     }
     .ad-box-medium img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
 
     /* HERO LIVE PLAYER */
@@ -707,11 +712,11 @@
     const CONFIG_BANNER = {
       midBanners: [
         {
-          attivo: false,
+          attivo: true,
           immagine: "Banner sito piccolo mio .png",
           link: "#produzioni",
           titoloPlaceholder: "Spazio Partner Commerciale 1",
-          sottotitoloPlaceholder: "Inserisci qui il tuo banner (formato consigliato 600x200 px)"
+          sottotitoloPlaceholder: ""
         },
         {
           attivo: false,
@@ -779,7 +784,7 @@
     const midSlots = document.getElementById('ad-mid-slots');
     midSlots.innerHTML = CONFIG_BANNER.midBanners.map(b => {
       if (b.attivo && b.immagine) {
-        return `<a href="${b.link}" target="_blank" rel="noopener" class="ad-box-medium"><img src="${b.immagine}" alt="Partner Commerciale"></a>`;
+        return `<a href="${b.link}" class="ad-box-medium ad-active"><img src="${b.immagine}" alt="${b.titoloPlaceholder}"></a>`;
       }
       return `<a href="${b.link}" class="ad-box-medium"><div class="ad-placeholder-text"><strong>${b.titoloPlaceholder}</strong><br><small>${b.sottotitoloPlaceholder}</small></div></a>`;
     }).join('');
@@ -819,7 +824,6 @@
             const fullHtml = (item.content || "") + " " + (item.description || "");
             let imgUrl = "";
 
-            // Cerca tutte le immagini presenti nel post (incluse quelle inserite nel corpo del testo)
             const imgMatches = [...fullHtml.matchAll(/<img[^>]+src="([^">]+)"/g)].map(m => m[1]);
             const candidates = [
               ...imgMatches,
