@@ -383,16 +383,13 @@
       font-weight: 500;
     }
 
-    /* =====================================================================
-       SEZIONE ARTICOLI & APPROFONDIMENTI: 2 RIGHE DA 3 SCHEDE VERTICALI
-       ===================================================================== */
-    .six-cards-grid {
+    /* ARTICOLI & APPROFONDIMENTI (SUBSTACK - 6 RIQUADRI CON FOTO) */
+    .articles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-
-    .editorial-card {
+    .article-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 12px;
@@ -401,69 +398,49 @@
       flex-direction: column;
       transition: transform 0.25s, border-color 0.25s;
     }
-    .editorial-card:hover {
+    .article-card:hover {
       transform: translateY(-4px);
       border-color: var(--accent-cyan);
     }
-
-    /* Riga 1: Schede Video con Logo Esaro TV su sfondo cinematografico */
-    .card-top-media {
+    .article-thumb {
       width: 100%;
       aspect-ratio: 16 / 9;
       background: #0a101d;
       overflow: hidden;
       border-bottom: 1px solid var(--border-color);
-      position: relative;
-    }
-    .card-top-media.logo-mode {
-      background: radial-gradient(circle at center, #142850 0%, #050811 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
     }
-    .card-top-media.logo-mode img {
-      height: 88px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.5));
-      transition: transform 0.25s ease;
-    }
-    .editorial-card:hover .card-top-media.logo-mode img {
-      transform: scale(1.06);
-    }
-
-    /* Riga 2: Schede Articoli con vera foto di copertina */
-    .card-top-media.photo-mode img {
+    .article-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
     }
-    .editorial-card:hover .card-top-media.photo-mode img {
+    .article-card:hover .article-thumb img {
       transform: scale(1.04);
     }
-
-    .editorial-body {
+    .article-body {
       padding: 22px;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .editorial-date {
+    .article-date {
       font-size: 0.78rem;
       color: var(--accent-cyan);
       font-weight: 600;
       margin-bottom: 8px;
       text-transform: uppercase;
     }
-    .editorial-card h3 {
+    .article-card h3 {
       font-size: 1.12rem;
       margin-bottom: 12px;
       line-height: 1.35;
     }
-    .editorial-excerpt {
+    .article-excerpt {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 20px;
@@ -541,7 +518,7 @@
     }
 
     @media (max-width: 960px) {
-      .six-cards-grid { grid-template-columns: 1fr; }
+      .articles-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 820px) {
@@ -650,21 +627,19 @@
     <div id="carousel-attualita" class="carousel-row"></div>
   </section>
 
-  <!-- SEZIONE ARTICOLI & APPROFONDIMENTI:
-       6 RIQUADRI SU 2 RIGHE (PRIMA RIGA = 3 VIDEO SUBSTACK CON LOGO ESARO TV; SECONDA RIGA = 3 ARTICOLI CON FOTO) -->
+  <!-- SEZIONE ARTICOLI & APPROFONDIMENTI (SUBSTACK CON FOTO DI ANTEPRIMA) -->
   <section id="articoli" class="container">
     <div class="section-head">
       <div>
         <h2>Articoli & Approfondimenti</h2>
-        <p>Videoservizi ed editoriali dal portale giornalistico Calabria Terra Mia (Substack)</p>
+        <p>Servizi giornalistici, docufilm ed editoriali su Calabria Terra Mia (Substack)</p>
       </div>
       <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary">
-        Tutti i contenuti su Substack ↗
+        Tutti gli articoli ↗
       </a>
     </div>
-
-    <div id="substack-six-grid" class="six-cards-grid">
-      <p style="color: var(--text-muted);">Caricamento contenuti da Substack...</p>
+    <div id="substack-feed" class="articles-grid">
+      <p style="color: var(--text-muted);">Caricamento ultimi contenuti da Substack...</p>
     </div>
   </section>
 
@@ -831,131 +806,70 @@
     renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
     renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
 
-    // Verifica se una foto di copertina è reale e caricabile
-    function checkImageLoads(url) {
-      return new Promise(resolve => {
-        if (!url || url.includes('.m3u8') || url.includes('.mp4') || url.includes('/video/')) {
-          resolve(false);
-          return;
-        }
-        const tester = new Image();
-        tester.onload = () => resolve(tester.naturalWidth > 100);
-        tester.onerror = () => resolve(false);
-        tester.src = url;
-      });
-    }
-
-    async function loadSubstackSixGrid() {
-      const gridContainer = document.getElementById('substack-six-grid');
+    // Lettura automatica ultimi 6 contenuti da Substack con estrazione foto
+    async function loadSubstackArticles() {
+      const container = document.getElementById('substack-feed');
       const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
-
       try {
-        // Aggiungo un parametro t= per evitare che il browser usi vecchi dati in cache
         const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&t=${Date.now()}`);
         const data = await res.json();
-
         if (data.status === 'ok' && data.items && data.items.length > 0) {
-          const videoPosts = [];
-          const writtenArticles = [];
-
-          for (const item of data.items) {
+          const articles = data.items.slice(0, 6);
+          container.innerHTML = articles.map(item => {
             const fullHtml = (item.content || "") + " " + (item.description || "");
-            const titleLower = (item.title || "").toLowerCase();
+            let imgUrl = "";
 
-            // Riconosce con certezza i post video di Substack
-            const hasVideoEnclosure = item.enclosure && (
-              (item.enclosure.type && item.enclosure.type.startsWith('video')) ||
-              (item.enclosure.link && (item.enclosure.link.includes('.m3u8') || item.enclosure.link.includes('.mp4') || item.enclosure.link.includes('/video/')))
-            );
-            const hasVideoMarkup = /<video|<iframe|youtube\.com|youtu\.be|vimeo\.com|substackcdn\.com\/video|video-wrap|substack-video/i.test(fullHtml);
-            const hasVideoTitle = titleLower.includes('docufilm') || titleLower.startsWith('video');
-
-            const isVideoPost = hasVideoEnclosure || hasVideoMarkup || hasVideoTitle;
-
-            let candidatePhoto = "";
+            // Cerca tutte le immagini presenti nel post (incluse quelle inserite nel corpo del testo)
+            const imgMatches = [...fullHtml.matchAll(/<img[^>]+src="([^">]+)"/g)].map(m => m[1]);
             const candidates = [
+              ...imgMatches,
               item.thumbnail,
-              (!hasVideoEnclosure && item.enclosure) ? item.enclosure.link : "",
-              (fullHtml.match(/<img[^>]+src="([^">]+)"/) || [])[1]
+              item.enclosure && item.enclosure.link
             ].filter(Boolean);
 
             for (const url of candidates) {
               if (!url.includes('.m3u8') && !url.includes('.mp4') && !url.includes('/video/')) {
-                candidatePhoto = url;
+                imgUrl = url;
                 break;
               }
             }
 
-            const photoWorks = !isVideoPost && await checkImageLoads(candidatePhoto);
-
-            if (isVideoPost || !photoWorks) {
-              videoPosts.push(item);
-            } else {
-              writtenArticles.push({ ...item, photo: candidatePhoto });
-            }
-          }
-
-          // PRIMA RIGA: i 3 videoservizi più recenti (con Logo Esaro TV su sfondo cinematografico, senza anteprima)
-          const row1Html = videoPosts.slice(0, 3).map(item => {
-            const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 125) + '...';
+            const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 130) + '...';
             const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+
             return `
-              <article class="editorial-card">
-                <a href="${item.link}" target="_blank" rel="noopener" class="card-top-media logo-mode">
+              <article class="article-card">
+                <a href="${item.link}" target="_blank" rel="noopener" class="article-thumb">
                   <img 
-                    src="Logo TV nuovo trasparente.png" 
-                    onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" 
-                    alt="Esaro TV">
+                    src="${imgUrl || 'Logo TV nuovo trasparente.png'}" 
+                    onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg'; this.style.objectFit='contain'; this.style.padding='20px';"
+                    alt="${item.title}">
                 </a>
-                <div class="editorial-body">
+                <div class="article-body">
                   <div>
-                    <div class="editorial-date">${dateStr}</div>
+                    <div class="article-date">${dateStr}</div>
                     <h3><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></h3>
-                    <p class="editorial-excerpt">${cleanText}</p>
+                    <p class="article-excerpt">${cleanText}</p>
                   </div>
-                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Guarda su Substack ▶</a>
+                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Leggi / Guarda su Substack →</a>
                 </div>
               </article>
             `;
           }).join('');
-
-          // SECONDA RIGA: i 3 articoli scritti più recenti (con vera immagine fotografica di copertina)
-          const row2Html = writtenArticles.slice(0, 3).map(item => {
-            const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 125) + '...';
-            const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
-            return `
-              <article class="editorial-card">
-                <a href="${item.link}" target="_blank" rel="noopener" class="card-top-media photo-mode">
-                  <img src="${item.photo}" alt="${item.title}">
-                </a>
-                <div class="editorial-body">
-                  <div>
-                    <div class="editorial-date">${dateStr}</div>
-                    <h3><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></h3>
-                    <p class="editorial-excerpt">${cleanText}</p>
-                  </div>
-                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Leggi l'articolo su Substack →</a>
-                </div>
-              </article>
-            `;
-          }).join('');
-
-          gridContainer.innerHTML = row1Html + row2Html;
-
         } else {
-          throw new Error('Nessun contenuto trovato');
+          throw new Error('Nessun articolo trovato');
         }
       } catch (e) {
-        gridContainer.innerHTML = `
-          <div class="editorial-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
-            <h3>Leggi tutti gli articoli e guarda i videoservizi su Substack</h3>
-            <p class="editorial-excerpt">Visita la pagina ufficiale Calabria Terra Mia per scoprire gli ultimi editoriali e servizi giornalistici.</p>
+        container.innerHTML = `
+          <div class="article-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
+            <h3>Leggi tutti gli articoli e gli approfondimenti su Substack</h3>
+            <p class="article-excerpt">Visita la pagina ufficiale Calabria Terra Mia per scoprire gli ultimi editoriali e servizi giornalistici.</p>
             <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary" style="margin: 0 auto;">Vai a Substack ↗</a>
           </div>
         `;
       }
     }
-    loadSubstackSixGrid();
+    loadSubstackArticles();
   </script>
 </body>
 </html>
