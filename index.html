@@ -383,7 +383,122 @@
       font-weight: 500;
     }
 
-    /* FASCIA 1 SUBSTACK: SOLO ARTICOLI SCRITTI CON FOTO REALE */
+    /* REPARTO EDITORIALE SUBSTACK: DUE SOTTOSEZIONI */
+    .subsection-block {
+      margin-top: 28px;
+    }
+    .subsection-block + .subsection-block {
+      margin-top: 44px;
+      padding-top: 34px;
+      border-top: 1px solid var(--border-color);
+    }
+    .subsection-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .subsection-title h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .subsection-badge {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+    }
+
+    /* SOTTOSEZIONE 1: VIDEOSERVIZI CON LOGO ESARO TV (SENZA ANTEPRIMA) */
+    .sub-videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .sub-video-item {
+      background: linear-gradient(135deg, #0e1629 0%, #0a101f 100%);
+      border: 1px solid #223152;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .sub-video-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-cyan);
+      background: linear-gradient(135deg, #131e38 0%, #0d1528 100%);
+    }
+    .sub-video-logo-box {
+      width: 86px;
+      height: 86px;
+      border-radius: 12px;
+      background: #050811;
+      border: 1px solid #24365c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    }
+    .sub-video-logo-box img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+      transition: transform 0.25s;
+    }
+    .sub-video-item:hover .sub-video-logo-box img {
+      transform: scale(1.06);
+    }
+    .sub-video-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .sub-video-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+    .sub-video-pill {
+      background: rgba(29, 99, 220, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #93c5fd;
+    }
+    .sub-video-content h4 {
+      font-size: 1.02rem;
+      line-height: 1.38;
+      margin-bottom: 6px;
+      color: #f8fafc;
+    }
+    .sub-video-content p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    /* SOTTOSEZIONE 2: SOLO ARTICOLI SCRITTI CON FOTO REALE */
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
@@ -432,7 +547,7 @@
       margin-bottom: 8px;
       text-transform: uppercase;
     }
-    .article-card h3 {
+    .article-card h4 {
       font-size: 1.15rem;
       margin-bottom: 12px;
       line-height: 1.35;
@@ -449,80 +564,6 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-
-    /* FASCIA 2 SUBSTACK: VIDEOSERVIZI & DOCUFILM CON ICONA DEDICATA */
-    .substack-videos-section {
-      padding-top: 10px;
-    }
-    .sub-videos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px;
-    }
-    .sub-video-item {
-      background: linear-gradient(135deg, #0e1629 0%, #0a101f 100%);
-      border: 1px solid #223152;
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      transition: transform 0.25s, border-color 0.25s, background 0.25s;
-    }
-    .sub-video-item:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-cyan);
-      background: linear-gradient(135deg, #131e38 0%, #0d1528 100%);
-    }
-    .sub-video-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent-blue) 0%, #0ea5e9 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: #ffffff;
-      font-size: 1.35rem;
-      box-shadow: 0 8px 20px rgba(29, 99, 220, 0.35);
-      transition: transform 0.25s;
-    }
-    .sub-video-item:hover .sub-video-icon {
-      transform: scale(1.06);
-    }
-    .sub-video-content {
-      flex: 1;
-    }
-    .sub-video-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--accent-cyan);
-    }
-    .sub-video-pill {
-      background: rgba(56, 189, 248, 0.14);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      padding: 2px 8px;
-      border-radius: 4px;
-      color: #7dd3fc;
-    }
-    .sub-video-content h3 {
-      font-size: 1.05rem;
-      line-height: 1.38;
-      margin-bottom: 8px;
-      color: #f8fafc;
-    }
-    .sub-video-content p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      line-height: 1.5;
     }
 
     /* SERVIZI PRODUCTION & CONTATTI */
@@ -594,6 +635,8 @@
       .top-claim { font-size: 1.25rem; }
       .ad-quad-grid { grid-template-columns: 1fr; }
       .sub-videos-grid { grid-template-columns: 1fr; }
+      .sub-video-item { align-items: flex-start; }
+      .sub-video-logo-box { width: 70px; height: 70px; }
       .services-box { grid-template-columns: 1fr; }
       .tv-header h1 { font-size: 1.35rem; }
     }
@@ -614,8 +657,7 @@
         <a href="#diretta" class="btn-live-nav"><span class="pulse-dot"></span> IN ONDA H24</a>
         <a href="#documentari">Documentari & Format</a>
         <a href="#attualita">Attualità & Servizi</a>
-        <a href="#articoli">Articoli</a>
-        <a href="#videoservizi-substack">Videoservizi</a>
+        <a href="#articoli">Articoli & Approfondimenti</a>
         <a href="#produzioni">Spot & Pubblicità</a>
       </nav>
     </div>
@@ -696,32 +738,36 @@
     <div id="carousel-attualita" class="carousel-row"></div>
   </section>
 
-  <!-- FASCIA 1: ARTICOLI & APPROFONDIMENTI (SOLO ARTICOLI SCRITTI CON FOTO) -->
+  <!-- REPARTO ARTICOLI & APPROFONDIMENTI (DIVISO IN DUE SOTTOSEZIONI) -->
   <section id="articoli" class="container">
     <div class="section-head">
       <div>
         <h2>Articoli & Approfondimenti</h2>
-        <p>Editoriali, inchieste e cronaca scritta su Calabria Terra Mia (Substack)</p>
+        <p>Il portale giornalistico Calabria Terra Mia su Substack: videoservizi e inchieste scritte</p>
       </div>
       <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary">
-        Tutti gli articoli ↗
+        Vai alla pagina Substack ↗
       </a>
     </div>
-    <div id="substack-articles-feed" class="articles-grid">
-      <p style="color: var(--text-muted);">Caricamento articoli da Substack...</p>
-    </div>
-  </section>
 
-  <!-- FASCIA 2: VIDEOSERVIZI & DOCUFILM SU SUBSTACK (CON ICONA DEDICATA) -->
-  <section id="videoservizi-substack" class="container substack-videos-section">
-    <div class="section-head">
-      <div>
-        <h2>Videoservizi & Docufilm su Substack</h2>
-        <p>Speciale multimediale: clicca per avviare la riproduzione diretta su Substack</p>
+    <!-- SOTTOSEZIONE 1: VIDEOSERVIZI (LOGO ESARO TV SENZA ANTEPRIMA) -->
+    <div id="sub-videos-wrapper" class="subsection-block">
+      <div class="subsection-title">
+        <h3>🎬 Videoservizi & Docufilm <span class="subsection-badge">Canale Substack</span></h3>
+      </div>
+      <div id="substack-videos-feed" class="sub-videos-grid">
+        <p style="color: var(--text-muted);">Caricamento videoservizi da Substack...</p>
       </div>
     </div>
-    <div id="substack-videos-feed" class="sub-videos-grid">
-      <p style="color: var(--text-muted);">Caricamento videoservizi da Substack...</p>
+
+    <!-- SOTTOSEZIONE 2: ARTICOLI SCRITTI (SOLO CON VERA IMMAGINE FOTOGRAFICA, SENZA VIDEO) -->
+    <div id="sub-articles-wrapper" class="subsection-block">
+      <div class="subsection-title">
+        <h3>📰 Articoli & Editoriali <span class="subsection-badge">Approfondimenti Scritti</span></h3>
+      </div>
+      <div id="substack-articles-feed" class="articles-grid">
+        <p style="color: var(--text-muted);">Caricamento articoli da Substack...</p>
+      </div>
     </div>
   </section>
 
@@ -776,133 +822,4 @@
       <div style="display: flex; gap: 18px;">
         <a href="https://www.youtube.com/watch?v=9IgWJPnZ13s" target="_blank">YouTube</a>
         <a href="https://substack.com/@calabriaterramia" target="_blank">Substack</a>
-        <a href="#produzioni">Pubblicità</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =====================================================================
-       PANNELLO DI GESTIONE FACILE (MODIFICA QUI VIDEO E BANNER PUBBLICITARI)
-       ===================================================================== -->
-  <script>
-    // 1. GESTIONE VETRINA COMMERCIALE (4 SPAZI PARTNER)
-    const CONFIG_BANNER = {
-      midBanners: [
-        {
-          attivo: false,
-          immagine: "",
-          link: "#produzioni",
-          titoloPlaceholder: "Spazio Partner Commerciale 1",
-          sottotitoloPlaceholder: "Inserisci qui il tuo banner (formato consigliato 600x200 px)"
-        },
-        {
-          attivo: false,
-          immagine: "",
-          link: "#produzioni",
-          titoloPlaceholder: "Spazio Partner Commerciale 2",
-          sottotitoloPlaceholder: "Visibilità garantita su Esaro TV • Contattaci per info"
-        },
-        {
-          attivo: false,
-          immagine: "",
-          link: "#produzioni",
-          titoloPlaceholder: "Spazio Partner Commerciale 3",
-          sottotitoloPlaceholder: "Promuovi la tua attività commerciale o il tuo evento"
-        },
-        {
-          attivo: false,
-          immagine: "",
-          link: "#produzioni",
-          titoloPlaceholder: "Spazio Partner Commerciale 4",
-          sottotitoloPlaceholder: "Spazio disponibile • Contatta la redazione al 329 4122113"
-        }
-      ]
-    };
-
-    // 2. GESTIONE CAROSELLO 1: DOCUMENTARI & FORMAT TELEVISIVI
-    const VIDEO_DOCUMENTARI = [
-      {
-        youtubeId: "8VJ-7WxG1Cc",
-        categoria: "Documentario",
-        titolo: "Documentario — Racconti, storia e identità del territorio"
-      },
-      {
-        youtubeId: "cOcFOhOZ1kU",
-        categoria: "Format TV",
-        titolo: "Format TV — Approfondimenti, ospiti e cultura"
-      },
-      {
-        youtubeId: "H-2lMK_nv1s",
-        categoria: "Comunicazione Sociale",
-        titolo: "Comunicazione Sociale — Storie di comunità e inclusione"
-      }
-    ];
-
-    // 3. GESTIONE CAROSELLO 2: ATTUALITÀ, VIDEOSERVIZI & EVENTI
-    const VIDEO_ATTUALITA = [
-      {
-        youtubeId: "Lu-HcxI4WyA",
-        categoria: "Attualità",
-        titolo: "Attualità — Videoservizio e cronaca dal territorio"
-      },
-      {
-        youtubeId: "lkq_mSUg81Q",
-        categoria: "Eventi",
-        titolo: "Eventi — Le immagini e i protagonisti degli appuntamenti"
-      },
-      {
-        youtubeId: "cTWUy0lGRoY",
-        categoria: "Spot e Promo",
-        titolo: "Spot e Promo — Produzioni commerciali e promozione attività"
-      }
-    ];
-
-    // --- MOTORE AUTOMATICO ---
-    const midSlots = document.getElementById('ad-mid-slots');
-    midSlots.innerHTML = CONFIG_BANNER.midBanners.map(b => {
-      if (b.attivo && b.immagine) {
-        return `<a href="${b.link}" target="_blank" rel="noopener" class="ad-box-medium"><img src="${b.immagine}" alt="Partner Commerciale"></a>`;
-      }
-      return `<a href="${b.link}" class="ad-box-medium"><div class="ad-placeholder-text"><strong>${b.titoloPlaceholder}</strong><br><small>${b.sottotitoloPlaceholder}</small></div></a>`;
-    }).join('');
-
-    function renderVideos(lista, containerId) {
-      const el = document.getElementById(containerId);
-      el.innerHTML = lista.map(v => `
-        <a href="https://youtu.be/${v.youtubeId}" target="_blank" rel="noopener" class="video-card">
-          <div class="thumb-box">
-            <img 
-              src="https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg" 
-              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg';"
-              alt="${v.titolo}">
-            <span class="cat-tag">${v.categoria}</span>
-            <div class="play-overlay"><div class="play-circle">▶</div></div>
-          </div>
-          <div class="video-info">
-            <h3>${v.titolo}</h3>
-            <span class="video-meta">Guarda su YouTube ↗</span>
-          </div>
-        </a>
-      `).join('');
-    }
-    renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
-    renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
-
-    // Separa automaticamente gli articoli scritti (con foto) dai videoservizi Substack (con icona dedicata)
-    async function loadSubstackContent() {
-      const articlesContainer = document.getElementById('substack-articles-feed');
-      const videosContainer = document.getElementById('substack-videos-feed');
-      const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
-
-      try {
-        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
-        const data = await res.json();
-
-        if (data.status === 'ok' && data.items && data.items.length > 0) {
-          const writtenArticles = [];
-          const videoPosts = [];
-
-          data.items.forEach(item => {
-            const fullHtml = (item.content || "") + " " + (item.description || "");
-            const isVideoEnclosure = item.enclosure && item.enclosure.type && item.enclosure.type.startsWith('video');
-            const isVideoUrl = item.enclosure && item.enclosure.link && (item.enclosure.link.includes('.m3u8') || item.enclosure.link.includes('.mp4') || item.enclosure.link.includes
+        <a href="#produzioni
