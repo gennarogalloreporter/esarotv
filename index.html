@@ -582,4 +582,280 @@
       <div class="tv-bar-bottom">
         <div>
           <strong style="color: var(--accent-cyan);">Palinsesto continuo Esaro TV:</strong>
-          <span style="color: var(--text-muted); font-size: 0.92rem;"> Documentari del territorio, inchieste
+          <span style="color: var(--text-muted); font-size: 0.92rem;"> Documentari del territorio, inchieste, cultura, eventi e format televisivi.</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          🔊 Clicca sull'icona audio nel player per attivare il volume
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROSELLO 1: DOCUMENTARI & FORMAT TELEVISIVI -->
+  <section id="documentari" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Documentari & Format Televisivi</h2>
+        <p>Racconti, storie e approfondimenti firmati Esaro TV</p>
+      </div>
+    </div>
+    <div id="carousel-documentari" class="carousel-row"></div>
+  </section>
+
+  <!-- VETRINA COMMERCIALE (4 SPAZI PARTNER COMMERCIALI) -->
+  <div class="container ad-wrapper">
+    <span class="ad-label">Vetrina Commerciale</span>
+    <div id="ad-mid-slots" class="ad-quad-grid"></div>
+  </div>
+
+  <!-- CAROSELLO 2: ATTUALITÀ, VIDEOSERVIZI & EVENTI -->
+  <section id="attualita" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Attualità, Videoservizi & Eventi</h2>
+        <p>Cronaca, territorio e reportage giornalistici</p>
+      </div>
+    </div>
+    <div id="carousel-attualita" class="carousel-row"></div>
+  </section>
+
+  <!-- SEZIONE ARTICOLI GIORNALISTICI (COLLEGATA A SUBSTACK CON FOTO DI ANTEPRIMA) -->
+  <section id="articoli" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Articoli & Approfondimenti</h2>
+        <p>Inchieste, editoriali e cronaca scritta su Calabria Terra Mia (Substack)</p>
+      </div>
+      <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary">
+        Tutti gli articoli ↗
+      </a>
+    </div>
+    <div id="substack-feed" class="articles-grid">
+      <p style="color: var(--text-muted);">Caricamento ultimi articoli da Substack...</p>
+    </div>
+  </section>
+
+  <!-- SERVIZI PROFESSIONALI FILMMAKER & SPAZI PUBBLICITARI -->
+  <section id="produzioni" class="container">
+    <div class="services-box">
+      <div>
+        <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Produzioni & Pubblicità</span>
+        <h2 style="font-size: 1.65rem; margin: 6px 0 12px;">Promuovi la tua attività su Esaro TV</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Dall'idea alla messa in onda: realizziamo contenuti audiovisivi su misura per aziende, enti, associazioni ed eventi, garantendo visibilità sia in TV che sul web.
+        </p>
+        <div class="services-list">
+          <div class="service-item">
+            <h4>🎬 Spot & Jingle Commerciali</h4>
+            <p>Ideazione, riprese professionali e jingle audio/video per promuovere la tua attività.</p>
+          </div>
+          <div class="service-item">
+            <h4>📺 Spazi Banner & Redazionali</h4>
+            <p>Visibilità sul portale esarotv.it e passaggi nel palinsesto giornaliero della Web TV.</p>
+          </div>
+          <div class="service-item">
+            <h4>🎥 Documentari & Eventi</h4>
+            <p>Copertura multicamera, format televisivi, dirette streaming e comunicazione sociale.</p>
+          </div>
+        </div>
+        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://wa.me/393294122113?text=Salve%2C%20vorrei%20informazioni%20per%20promuovere%20la%20mia%20attivit%C3%A0%20su%20Esaro%20TV" target="_blank" rel="noopener" class="btn-primary" style="background: #16a34a;">
+            💬 Scrivici su WhatsApp (329 4122113)
+          </a>
+          <a href="mailto:info@esarotv.it?subject=Richiesta%20Informazioni%20Pubblicit%C3%A0%20e%20Produzioni" class="btn-primary">
+            ✉️ Invia un'Email
+          </a>
+        </div>
+      </div>
+
+      <div class="qr-card">
+        <img src="qr-code.png" alt="QR Code Esaro TV">
+        <span>Inquadra e porta Esaro TV sempre con te</span>
+        <small style="color: #64748b; font-size: 0.72rem;">www.esarotv.it</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong style="color: #fff;">ESARO TV</strong> — Web TV, Informazione & Produzioni Audiovisive<br>
+        <span>Dominio ufficiale: www.esarotv.it • WhatsApp Redazione/Spot: 329 4122113</span>
+      </div>
+      <div style="display: flex; gap: 18px;">
+        <a href="https://www.youtube.com/watch?v=9IgWJPnZ13s" target="_blank">YouTube</a>
+        <a href="https://substack.com/@calabriaterramia" target="_blank">Substack</a>
+        <a href="#produzioni">Pubblicità</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       PANNELLO DI GESTIONE FACILE (MODIFICA QUI VIDEO E BANNER PUBBLICITARI)
+       ===================================================================== -->
+  <script>
+    // 1. GESTIONE VETRINA COMMERCIALE (4 SPAZI PARTNER)
+    const CONFIG_BANNER = {
+      midBanners: [
+        {
+          attivo: false,
+          immagine: "",
+          link: "#produzioni",
+          titoloPlaceholder: "Spazio Partner Commerciale 1",
+          sottotitoloPlaceholder: "Inserisci qui il tuo banner (formato consigliato 600x200 px)"
+        },
+        {
+          attivo: false,
+          immagine: "",
+          link: "#produzioni",
+          titoloPlaceholder: "Spazio Partner Commerciale 2",
+          sottotitoloPlaceholder: "Visibilità garantita su Esaro TV • Contattaci per info"
+        },
+        {
+          attivo: false,
+          immagine: "",
+          link: "#produzioni",
+          titoloPlaceholder: "Spazio Partner Commerciale 3",
+          sottotitoloPlaceholder: "Promuovi la tua attività commerciale o il tuo evento"
+        },
+        {
+          attivo: false,
+          immagine: "",
+          link: "#produzioni",
+          titoloPlaceholder: "Spazio Partner Commerciale 4",
+          sottotitoloPlaceholder: "Spazio disponibile • Contatta la redazione al 329 4122113"
+        }
+      ]
+    };
+
+    // 2. GESTIONE CAROSELLO 1: DOCUMENTARI & FORMAT TELEVISIVI
+    const VIDEO_DOCUMENTARI = [
+      {
+        youtubeId: "8VJ-7WxG1Cc",
+        categoria: "Documentario",
+        titolo: "Documentario — Racconti, storia e identità del territorio"
+      },
+      {
+        youtubeId: "cOcFOhOZ1kU",
+        categoria: "Format TV",
+        titolo: "Format TV — Approfondimenti, ospiti e cultura"
+      },
+      {
+        youtubeId: "H-2lMK_nv1s",
+        categoria: "Comunicazione Sociale",
+        titolo: "Comunicazione Sociale — Storie di comunità e inclusione"
+      }
+    ];
+
+    // 3. GESTIONE CAROSELLO 2: ATTUALITÀ, VIDEOSERVIZI & EVENTI
+    const VIDEO_ATTUALITA = [
+      {
+        youtubeId: "Lu-HcxI4WyA",
+        categoria: "Attualità",
+        titolo: "Attualità — Videoservizio e cronaca dal territorio"
+      },
+      {
+        youtubeId: "lkq_mSUg81Q",
+        categoria: "Eventi",
+        titolo: "Eventi — Le immagini e i protagonisti degli appuntamenti"
+      },
+      {
+        youtubeId: "cTWUy0lGRoY",
+        categoria: "Spot e Promo",
+        titolo: "Spot e Promo — Produzioni commerciali e promozione attività"
+      }
+    ];
+
+    // --- MOTORE AUTOMATICO ---
+    const midSlots = document.getElementById('ad-mid-slots');
+    midSlots.innerHTML = CONFIG_BANNER.midBanners.map(b => {
+      if (b.attivo && b.immagine) {
+        return `<a href="${b.link}" target="_blank" rel="noopener" class="ad-box-medium"><img src="${b.immagine}" alt="Partner Commerciale"></a>`;
+      }
+      return `<a href="${b.link}" class="ad-box-medium"><div class="ad-placeholder-text"><strong>${b.titoloPlaceholder}</strong><br><small>${b.sottotitoloPlaceholder}</small></div></a>`;
+    }).join('');
+
+    function renderVideos(lista, containerId) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = lista.map(v => `
+        <a href="https://youtu.be/${v.youtubeId}" target="_blank" rel="noopener" class="video-card">
+          <div class="thumb-box">
+            <img 
+              src="https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg" 
+              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg';"
+              alt="${v.titolo}">
+            <span class="cat-tag">${v.categoria}</span>
+            <div class="play-overlay"><div class="play-circle">▶</div></div>
+          </div>
+          <div class="video-info">
+            <h3>${v.titolo}</h3>
+            <span class="video-meta">Guarda su YouTube ↗</span>
+          </div>
+        </a>
+      `).join('');
+    }
+    renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
+    renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
+
+    // Lettura automatica ultimi articoli da Substack con estrazione foto di anteprima
+    async function loadSubstackArticles() {
+      const container = document.getElementById('substack-feed');
+      const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
+      try {
+        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
+        const data = await res.json();
+        if (data.status === 'ok' && data.items && data.items.length > 0) {
+          const articles = data.items.slice(0, 6);
+          container.innerHTML = articles.map(item => {
+            // Estrae l'immagine dall'articolo (thumbnail, enclosure o primo tag <img> nel contenuto)
+            let imgUrl = item.thumbnail || (item.enclosure && item.enclosure.link) || "";
+            if (!imgUrl && item.content) {
+              const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
+              if (imgMatch && imgMatch[1]) imgUrl = imgMatch[1];
+            }
+            if (!imgUrl && item.description) {
+              const imgMatchDesc = item.description.match(/<img[^>]+src="([^">]+)"/);
+              if (imgMatchDesc && imgMatchDesc[1]) imgUrl = imgMatchDesc[1];
+            }
+            // Immagine di fallback elegante se l'articolo su Substack non contiene immagini
+            const fallbackImg = "Logo TV nuovo trasparente.png";
+
+            const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 135) + '...';
+            const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+            return `
+              <article class="article-card">
+                <a href="${item.link}" target="_blank" rel="noopener" class="article-thumb">
+                  <img 
+                    src="${imgUrl || fallbackImg}" 
+                    onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';"
+                    alt="${item.title}">
+                </a>
+                <div class="article-body">
+                  <div>
+                    <div class="article-date">${dateStr}</div>
+                    <h3><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></h3>
+                    <p class="article-excerpt">${cleanText}</p>
+                  </div>
+                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Leggi l'articolo su Substack →</a>
+                </div>
+              </article>
+            `;
+          }).join('');
+        } else {
+          throw new Error('Nessun articolo trovato');
+        }
+      } catch (e) {
+        container.innerHTML = `
+          <div class="article-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
+            <h3>Leggi tutti gli articoli e gli approfondimenti su Substack</h3>
+            <p class="article-excerpt">Visita la pagina ufficiale Calabria Terra Mia per scoprire gli ultimi editoriali e servizi giornalistici.</p>
+            <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary" style="margin: 0 auto;">Vai a Substack ↗</a>
+          </div>
+        `;
+      }
+    }
+    loadSubstackArticles();
+  </script>
+</body>
+</html>
