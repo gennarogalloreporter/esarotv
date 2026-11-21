@@ -111,21 +111,22 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
 
-    /* CLAIM BIANCO IN ALTO + BANNER SOCIAL */
+    /* CLAIM BIANCO INGRANGITO IN ALTO + BANNER SOCIAL */
     .top-banner-section {
-      padding: 22px 20px 6px;
+      padding: 24px 20px 6px;
       max-width: 1280px;
       margin: 0 auto;
     }
     .top-claim {
       text-align: center;
       color: #ffffff;
-      font-size: 1.25rem;
+      font-size: 1.9rem;
       font-weight: 800;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-bottom: 16px;
-      text-shadow: 0 2px 12px rgba(56, 189, 248, 0.35);
+      margin-bottom: 18px;
+      line-height: 1.3;
+      text-shadow: 0 2px 14px rgba(56, 189, 248, 0.45);
     }
     .top-banner-frame {
       width: 100%;
@@ -516,7 +517,7 @@
     @media (max-width: 820px) {
       nav { display: none; }
       .logo-box img { height: 68px; }
-      .top-claim { font-size: 1rem; }
+      .top-claim { font-size: 1.25rem; }
       .ad-quad-grid { grid-template-columns: 1fr; }
       .services-box { grid-template-columns: 1fr; }
       .tv-header h1 { font-size: 1.35rem; }
@@ -619,7 +620,7 @@
     <div id="carousel-attualita" class="carousel-row"></div>
   </section>
 
-  <!-- SEZIONE ARTICOLI GIORNALISTICI (COLLEGATA A SUBSTACK CON FOTO DI ANTEPRIMA) -->
+  <!-- SEZIONE ARTICOLI GIORNALISTICI (COLLEGATA A SUBSTACK CON ANTEPRIME INTELLIGENTI) -->
   <section id="articoli" class="container">
     <div class="section-head">
       <div>
@@ -798,7 +799,7 @@
     renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
     renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
 
-    // Lettura automatica ultimi articoli da Substack con estrazione foto di anteprima
+    // Lettura automatica ultimi articoli da Substack con gestione foto e video
     async function loadSubstackArticles() {
       const container = document.getElementById('substack-feed');
       const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
@@ -808,28 +809,46 @@
         if (data.status === 'ok' && data.items && data.items.length > 0) {
           const articles = data.items.slice(0, 6);
           container.innerHTML = articles.map(item => {
-            // Estrae l'immagine dall'articolo (thumbnail, enclosure o primo tag <img> nel contenuto)
-            let imgUrl = item.thumbnail || (item.enclosure && item.enclosure.link) || "";
-            if (!imgUrl && item.content) {
-              const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
-              if (imgMatch && imgMatch[1]) imgUrl = imgMatch[1];
+            const fullHtml = (item.content || "") + " " + (item.description || "");
+            let imgUrl = "";
+
+            // 1. Controlla se c'è un video YouTube incorporato nell'articolo e prende la sua miniatura
+            const ytMatch = fullHtml.match(/(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+              imgUrl = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
             }
-            if (!imgUrl && item.description) {
-              const imgMatchDesc = item.description.match(/<img[^>]+src="([^">]+)"/);
-              if (imgMatchDesc && imgMatchDesc[1]) imgUrl = imgMatchDesc[1];
+
+            // 2. Altrimenti cerca una vera immagine (escludendo flussi video .m3u8 o .mp4)
+            if (!imgUrl) {
+              const candidates = [
+                item.thumbnail,
+                item.enclosure && item.enclosure.link,
+                (fullHtml.match(/<img[^>]+src="([^">]+)"/) || [])[1]
+              ].filter(Boolean);
+
+              for (const url of candidates) {
+                if (!url.includes('.m3u8') && !url.includes('.mp4') && !url.includes('video')) {
+                  imgUrl = url;
+                  break;
+                }
+              }
             }
-            // Immagine di fallback elegante se l'articolo su Substack non contiene immagini
-            const fallbackImg = "Logo TV nuovo trasparente.png";
 
             const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 135) + '...';
             const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+
+            // Se è un video nativo Substack senza immagine estraibile, mostra un'anteprima grafica elegante con il logo
+            const thumbHtml = imgUrl
+              ? `<img src="${imgUrl}" onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg'; this.style.objectFit='contain'; this.style.padding='20px';" alt="${item.title}">`
+              : `<div style="width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background: radial-gradient(circle, #132244 0%, #070b14 100%); padding:16px;">
+                   <img src="Logo TV nuovo trasparente.png" onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" style="height:75px; width:auto; object-fit:contain; margin-bottom:8px;" alt="Esaro TV">
+                   <span style="background:#1d63dc; color:#fff; font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:4px;">▶ VIDEOSERVIZIO SU SUBSTACK</span>
+                 </div>`;
+
             return `
               <article class="article-card">
                 <a href="${item.link}" target="_blank" rel="noopener" class="article-thumb">
-                  <img 
-                    src="${imgUrl || fallbackImg}" 
-                    onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';"
-                    alt="${item.title}">
+                  ${thumbHtml}
                 </a>
                 <div class="article-body">
                   <div>
@@ -837,7 +856,7 @@
                     <h3><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></h3>
                     <p class="article-excerpt">${cleanText}</p>
                   </div>
-                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Leggi l'articolo su Substack →</a>
+                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Guarda / Leggi su Substack →</a>
                 </div>
               </article>
             `;
