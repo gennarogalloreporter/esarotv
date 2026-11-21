@@ -111,7 +111,7 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
 
-    /* CLAIM BIANCO INGRANGITO IN ALTO + BANNER SOCIAL */
+    /* CLAIM BIANCO IN ALTO + BANNER SOCIAL */
     .top-banner-section {
       padding: 24px 20px 6px;
       max-width: 1280px;
@@ -383,7 +383,7 @@
       font-weight: 500;
     }
 
-    /* ARTICOLI SUBSTACK CON FOTO DI ANTEPRIMA */
+    /* ARTICOLI SUBSTACK CON ANTEPRIMA FOTOGRAFICA O COVER BROADCAST */
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
@@ -403,20 +403,56 @@
       border-color: var(--accent-cyan);
     }
     .article-thumb {
+      position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: #0a101d;
+      background: radial-gradient(circle at center, #132347 0%, #070b14 100%);
       overflow: hidden;
       border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .article-thumb img {
+    .article-thumb img.real-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
-    .article-card:hover .article-thumb img {
+    .article-card:hover .article-thumb img.real-photo {
       transform: scale(1.04);
+    }
+    /* Cover elegante di fallback mostrata automaticamente se Substack non fornisce foto */
+    .substack-video-cover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+      z-index: 1;
+    }
+    .substack-video-cover img {
+      height: 76px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45));
+    }
+    .substack-video-badge {
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
     .article-body {
       padding: 22px;
@@ -620,7 +656,7 @@
     <div id="carousel-attualita" class="carousel-row"></div>
   </section>
 
-  <!-- SEZIONE ARTICOLI GIORNALISTICI (COLLEGATA A SUBSTACK CON ANTEPRIME INTELLIGENTI) -->
+  <!-- SEZIONE ARTICOLI GIORNALISTICI (COLLEGATA A SUBSTACK) -->
   <section id="articoli" class="container">
     <div class="section-head">
       <div>
@@ -768,6 +804,14 @@
       }
     ];
 
+    // 4. COPERTINE PERSONALIZZATE PER I VIDEO SUBSTACK (OPZIONALE)
+    // Se un post video su Substack esiste anche su YouTube, associa una parola del titolo all'ID YouTube
+    // per mostrare la vera foto del video invece della grafica standard Esaro TV!
+    const COPERTINE_SUBSTACK_YOUTUBE = [
+      // Esempio: { parolaNelTitolo: "Agricoltori", youtubeId: "INSERISCI_ID_YOUTUBE" },
+      // Esempio: { parolaNelTitolo: "San Lorenzo", youtubeId: "INSERISCI_ID_YOUTUBE" }
+    ];
+
     // --- MOTORE AUTOMATICO ---
     const midSlots = document.getElementById('ad-mid-slots');
     midSlots.innerHTML = CONFIG_BANNER.midBanners.map(b => {
@@ -799,7 +843,7 @@
     renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
     renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
 
-    // Lettura automatica ultimi articoli da Substack con gestione foto e video
+    // Lettura automatica ultimi articoli da Substack con eliminazione garantita icone rotte
     async function loadSubstackArticles() {
       const container = document.getElementById('substack-feed');
       const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
@@ -812,13 +856,23 @@
             const fullHtml = (item.content || "") + " " + (item.description || "");
             let imgUrl = "";
 
-            // 1. Controlla se c'è un video YouTube incorporato nell'articolo e prende la sua miniatura
-            const ytMatch = fullHtml.match(/(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-            if (ytMatch && ytMatch[1]) {
-              imgUrl = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+            // A) Controlla se hai associato manualmente un ID YouTube nella lista COPERTINE_SUBSTACK_YOUTUBE
+            const customMatch = COPERTINE_SUBSTACK_YOUTUBE.find(c =>
+              item.title.toLowerCase().includes(c.parolaNelTitolo.toLowerCase())
+            );
+            if (customMatch && customMatch.youtubeId) {
+              imgUrl = `https://img.youtube.com/vi/${customMatch.youtubeId}/hqdefault.jpg`;
             }
 
-            // 2. Altrimenti cerca una vera immagine (escludendo flussi video .m3u8 o .mp4)
+            // B) Controlla se c'è un video YouTube incorporato nell'articolo
+            if (!imgUrl) {
+              const ytMatch = fullHtml.match(/(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+              if (ytMatch && ytMatch[1]) {
+                imgUrl = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+              }
+            }
+
+            // C) Altrimenti cerca l'immagine dell'articolo
             if (!imgUrl) {
               const candidates = [
                 item.thumbnail,
@@ -827,7 +881,7 @@
               ].filter(Boolean);
 
               for (const url of candidates) {
-                if (!url.includes('.m3u8') && !url.includes('.mp4') && !url.includes('video')) {
+                if (!url.includes('.m3u8') && !url.includes('.mp4')) {
                   imgUrl = url;
                   break;
                 }
@@ -837,18 +891,20 @@
             const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 135) + '...';
             const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
 
-            // Se è un video nativo Substack senza immagine estraibile, mostra un'anteprima grafica elegante con il logo
-            const thumbHtml = imgUrl
-              ? `<img src="${imgUrl}" onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg'; this.style.objectFit='contain'; this.style.padding='20px';" alt="${item.title}">`
-              : `<div style="width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background: radial-gradient(circle, #132244 0%, #070b14 100%); padding:16px;">
-                   <img src="Logo TV nuovo trasparente.png" onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" style="height:75px; width:auto; object-fit:contain; margin-bottom:8px;" alt="Esaro TV">
-                   <span style="background:#1d63dc; color:#fff; font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:4px;">▶ VIDEOSERVIZIO SU SUBSTACK</span>
-                 </div>`;
+            // Sotto c'è sempre la cover grafica elegante Esaro TV; sopra si carica la foto reale SOLO se valida.
+            // Se Substack blocca la foto (come nei post video nativi), onerror="this.remove()" elimina l'icona rotta e lascia visibile la grafica pulita!
+            const realPhotoTag = imgUrl
+              ? `<img class="real-photo" src="${imgUrl}" onerror="this.remove()" alt="${item.title}">`
+              : "";
 
             return `
               <article class="article-card">
                 <a href="${item.link}" target="_blank" rel="noopener" class="article-thumb">
-                  ${thumbHtml}
+                  <div class="substack-video-cover">
+                    <img src="Logo TV nuovo trasparente.png" onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" alt="Esaro TV">
+                    <span class="substack-video-badge">▶ Videoservizio su Substack</span>
+                  </div>
+                  ${realPhotoTag}
                 </a>
                 <div class="article-body">
                   <div>
