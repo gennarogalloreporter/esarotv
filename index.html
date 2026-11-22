@@ -1,528 +1,636 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video</title>
-  <meta name="description" content="Esaro TV: la prima Social TV, la guardi quando vuoi e dove vuoi tu. Diretta streaming 24/7, documentari, videoservizi giornalistici, approfondimenti e produzioni video.">
-  <link rel="canonical" href="https://www.esarotv.it/">
-
-  <!-- Open Graph / Anteprima WhatsApp e Social (blocco unico pulito) -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Esaro Web TV">
-  <meta property="og:locale" content="it_IT">
-  <meta property="og:url" content="https://www.esarotv.it/">
-  <meta property="og:title" content="Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video">
-  <meta property="og:description" content="Esaro TV: la prima Social TV, la guardi quando vuoi e dove vuoi tu. Diretta streaming 24/7, documentari, videoservizi giornalistici, approfondimenti e produzioni video.">
-  <meta property="og:image" content="https://www.esarotv.it/banner-mio-ridotto.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video">
-  <meta name="twitter:description" content="Diretta streaming 24/7, documentari, videoservizi giornalistici e produzioni video dalla Calabria.">
-  <meta name="twitter:image" content="https://www.esarotv.it/banner-mio-ridotto.jpg">
-
+<!-- Open Graph / Anteprima WhatsApp e Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.esarotv.it/">
+<meta property="og:title" content="Esaro Web TV - La voce del territorio calabrese">
+<meta property="og:description" content="Diretta streaming 24/7, servizi giornalistici, documentari, eventi e approfondimenti dalla Calabria.">
+<meta property="og:image" content="https://www.esarotv.it/banner-mio-ridotto.jpg">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esaro TV — Web TV, Documentari, Attualità & Produzioni Video</title>
+  <meta name="description" content="Esaro TV: la prima Social TV, la guardi quando vuoi e dove vuoi tu. Documentari, videoservizi giornalistici, approfondimenti e produzioni video." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #09131d;
-      --bg-card: #112233;
-      --accent: #00b4d8;
-      --accent-warm: #f59e0b;
-      --text-light: #f1f5f9;
+      --bg-main: #060911;
+      --bg-card: #0e1424;
+      --bg-card-hover: #151e36;
+      --border-color: #1e2942;
+      --accent-blue: #1d63dc;
+      --accent-cyan: #38bdf8;
+      --text-main: #f1f5f9;
       --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.12);
+      --live-red: #ef4444;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
     .container {
-      max-width: 1180px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    /* HEADER */
+    /* HEADER CON LOGO IN GRANDE RISALTO A SINISTRA */
     header {
-      background: linear-gradient(180deg, #060d14 0%, #0d1d2d 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0;
+      background: linear-gradient(90deg, #0b1326 0%, #050811 55%, #000000 100%);
+      border-bottom: 1px solid #243456;
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.65);
     }
-
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
+      padding: 10px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 20px;
     }
-
-    .brand {
+    .logo-box {
       display: flex;
       align-items: center;
-      gap: 14px;
+      flex-shrink: 0;
+      padding: 4px 12px 4px 0;
     }
-
-    .brand img {
-      height: 54px;
+    .logo-box img {
+      height: 86px;
       width: auto;
       object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
+      transition: transform 0.25s ease;
     }
-
-    .brand-text h1 {
-      font-size: 1.45rem;
-      letter-spacing: 0.5px;
-      color: #ffffff;
-    }
-
-    .brand-text span {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--accent);
+    .logo-box:hover img {
+      transform: scale(1.03);
     }
 
     nav {
       display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
+      gap: 22px;
+      align-items: center;
     }
-
     nav a {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       font-weight: 600;
-      color: var(--text-light);
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
+      color: #cbd5e1;
+      transition: color 0.2s;
     }
-
-    nav a:hover {
-      background: rgba(0, 180, 216, 0.15);
-      color: var(--accent);
-    }
-
-    /* SEZIONE DIRETTA TV */
-    .live-section {
-      padding: 36px 0 24px;
-    }
-
-    .live-badge {
-      display: inline-flex;
+    nav a:hover { color: var(--accent-cyan); }
+    .btn-live-nav {
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid var(--live-red);
+      color: #fecaca !important;
+      padding: 7px 15px;
+      border-radius: 99px;
+      display: flex;
       align-items: center;
       gap: 8px;
-      background: #dc2626;
-      color: #fff;
-      font-size: 0.78rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 14px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--live-red);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
 
-    .live-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 28px;
-      align-items: center;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    /* CLAIM BIANCO IN ALTO + BANNER SOCIAL */
+    .top-banner-section {
+      padding: 24px 20px 6px;
+      max-width: 1280px;
+      margin: 0 auto;
     }
-
-    .live-screen {
-      background: radial-gradient(circle at center, #16324f 0%, #071019 100%);
-      border: 1px solid rgba(0, 180, 216, 0.35);
-      border-radius: 12px;
-      aspect-ratio: 16 / 9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .top-claim {
       text-align: center;
-      padding: 24px;
-    }
-
-    .live-screen img {
-      max-height: 95px;
-      margin-bottom: 14px;
-    }
-
-    .live-screen h2 {
-      font-size: 1.35rem;
-      margin-bottom: 8px;
-    }
-
-    .live-screen p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
+      color: #ffffff;
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
       margin-bottom: 18px;
+      line-height: 1.3;
+      text-shadow: 0 2px 14px rgba(56, 189, 248, 0.45);
+    }
+    .top-banner-frame {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #26385e;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .top-banner-frame:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+    .top-banner-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    .btn-primary {
-      display: inline-block;
-      background: var(--accent);
-      color: #041019;
-      font-weight: 700;
-      padding: 12px 22px;
-      border-radius: 8px;
-      transition: transform 0.15s, opacity 0.2s;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-    }
-
-    .btn-whatsapp {
-      display: inline-block;
-      background: #22c55e;
-      color: #052e16;
-      font-weight: 700;
-      padding: 12px 22px;
-      border-radius: 8px;
-    }
-
-    .live-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-
-    .live-info p {
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      font-size: 0.96rem;
-    }
-
-    .channel-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .pill-link {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-
-    .pill-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* VETRINA COMMERCIALE */
+    /* VETRINA COMMERCIALE (4 SPAZI PARTNER) */
     .ad-wrapper {
-      margin: 28px auto;
-      padding: 22px;
-      background: #0e1c2b;
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      margin: 24px auto;
+      text-align: center;
     }
-
     .ad-label {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--accent-warm);
+      letter-spacing: 1.5px;
+      color: #64748b;
+      margin-bottom: 10px;
       font-weight: 700;
-      margin-bottom: 14px;
     }
+    .ad-placeholder-text {
+      padding: 18px 24px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .ad-placeholder-text strong { color: var(--accent-cyan); }
 
     .ad-quad-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-
     .ad-box-medium {
-      background: #14273b;
-      border: 1px dashed rgba(255, 255, 255, 0.22);
+      min-height: 140px;
+      background: var(--bg-card);
+      border: 1px dashed #263554;
       border-radius: 10px;
-      min-height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       overflow: hidden;
       transition: border-color 0.2s, transform 0.2s;
     }
-
+    .ad-box-medium.ad-active {
+      border: 1px solid #2b406b;
+      background: #ffffff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
     .ad-box-medium:hover {
-      border-color: var(--accent);
+      border-color: var(--accent-cyan);
       transform: translateY(-2px);
     }
-
-    .ad-box-medium.ad-active {
-      border: 1px solid rgba(0, 180, 216, 0.45);
-      background: #08121c;
-    }
-
-    .ad-box-medium.ad-active img {
+    .ad-box-medium img {
       width: 100%;
       height: auto;
       display: block;
-      object-fit: cover;
     }
 
-    .ad-placeholder-text {
-      padding: 18px;
-      color: var(--text-muted);
+    /* HERO LIVE PLAYER */
+    .hero-tv {
+      padding: 18px 0 40px;
+      background: radial-gradient(circle at top center, #111d38 0%, var(--bg-main) 70%);
     }
-
-    .ad-placeholder-text strong {
-      color: var(--text-light);
-      font-size: 0.98rem;
-    }
-
-    /* ARTICOLI SUBSTACK */
-    .section-block {
-      padding: 34px 0;
-    }
-
-    .section-header {
+    .tv-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 20px;
-      gap: 12px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
+      gap: 12px;
     }
-
-    .section-header h2 {
-      font-size: 1.5rem;
-      color: #ffffff;
+    .tv-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--live-red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
     }
+    .tv-header h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .tv-frame-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #263659;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    }
+    .tv-frame-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .tv-bar-bottom {
+      margin-top: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #2563eb; }
 
-    .section-header p {
+    /* SEZIONI GENERICHE */
+    section { padding: 48px 0; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--accent-cyan);
+      padding-left: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-head h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+    .section-head p {
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
+    /* CAROSELLO VIDEO ORIZZONTALE */
+    .carousel-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(300px, 1fr);
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scroll-snap-type: x mandatory;
+    }
+    .carousel-row::-webkit-scrollbar { height: 6px; }
+    .carousel-row::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 4px; }
+    .carousel-row::-webkit-scrollbar-thumb { background: #2a3b63; border-radius: 4px; }
+
+    .video-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: transform 0.25s, border-color 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+    .thumb-box {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .video-card:hover .thumb-box img { transform: scale(1.04); }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-circle {
+      width: 50px;
+      height: 50px;
+      background: rgba(29, 99, 220, 0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .cat-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(6, 9, 17, 0.88);
+      color: var(--accent-cyan);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .video-info {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .video-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .video-meta {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    /* ARTICOLI & APPROFONDIMENTI (SUBSTACK - 6 RIQUADRI CON FOTO) */
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
-
     .article-card {
       background: var(--bg-card);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.25s, border-color 0.25s;
     }
-
     .article-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
     }
-
-    .article-card img {
+    .article-thumb {
       width: 100%;
-      height: 185px;
-      object-fit: cover;
-      background: #071019;
+      aspect-ratio: 16 / 9;
+      background: #0a101d;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
+    .article-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .article-card:hover .article-thumb img {
+      transform: scale(1.04);
+    }
     .article-body {
-      padding: 18px;
+      padding: 22px;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      flex: 1;
+      justify-content: space-between;
     }
-
     .article-date {
       font-size: 0.78rem;
-      color: var(--accent);
-      margin-bottom: 6px;
+      color: var(--accent-cyan);
       font-weight: 600;
-    }
-
-    .article-body h3 {
-      font-size: 1.05rem;
       margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .article-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 12px;
       line-height: 1.35;
     }
-
-    .article-body p {
-      font-size: 0.88rem;
+    .article-excerpt {
+      font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 14px;
-      flex: 1;
+      margin-bottom: 20px;
     }
-
-    .read-more {
-      font-size: 0.86rem;
+    .read-link {
+      font-size: 0.88rem;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent-cyan);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* PRODUZIONI & CONTATTI */
+    /* SERVIZI PRODUCTION & CONTATTI */
     .services-box {
-      background: linear-gradient(135deg, #102438 0%, #0b1826 100%);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 30px;
+      background: linear-gradient(145deg, #0d1528 0%, #090e1a 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 36px;
       display: grid;
-      grid-template-columns: 1.4fr 0.8fr;
-      gap: 28px;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
       align-items: center;
     }
-
     .services-list {
-      list-style: none;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px 18px;
-      margin: 16px 0 22px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
     }
-
-    .services-list li {
-      font-size: 0.94rem;
-      color: var(--text-light);
+    .service-item {
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
-
-    .services-list li::before {
-      content: "▸ ";
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .service-item h4 { color: var(--accent-cyan); margin-bottom: 6px; font-size: 0.98rem; }
+    .service-item p { font-size: 0.85rem; color: var(--text-muted); }
 
     .qr-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      color: #0f172a;
+      padding: 20px;
       border-radius: 12px;
-      padding: 18px;
       text-align: center;
+      max-width: 240px;
+      margin: 0 auto;
     }
-
     .qr-card img {
-      max-width: 155px;
-      border-radius: 8px;
-      background: #fff;
-      padding: 6px;
-      margin-bottom: 10px;
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 10px;
     }
-
-    .qr-card p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .qr-card span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: block;
+      color: #1e3a8a;
     }
 
     /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 26px 0;
-      margin-top: 30px;
-      text-align: center;
+      border-top: 1px solid var(--border-color);
+      padding: 36px 0;
+      margin-top: 40px;
       color: var(--text-muted);
-      font-size: 0.86rem;
+      font-size: 0.88rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    @media (max-width: 860px) {
-      .live-box,
-      .services-box,
-      .ad-quad-grid,
-      .articles-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 960px) {
+      .articles-grid { grid-template-columns: 1fr; }
+    }
 
-      .services-list {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 820px) {
+      nav { display: none; }
+      .logo-box img { height: 68px; }
+      .top-claim { font-size: 1.25rem; }
+      .ad-quad-grid { grid-template-columns: 1fr; }
+      .services-box { grid-template-columns: 1fr; }
+      .tv-header h1 { font-size: 1.35rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- INTESTAZIONE -->
+  <!-- INTESTAZIONE CON LOGO IN EVIDENZA A SINISTRA -->
   <header>
-    <div class="container header-inner">
-      <a href="https://www.esarotv.it/" class="brand">
-        <img src="Logo TV nuovo trasparente.png" alt="Logo Esaro Web TV" onerror="this.style.display='none'">
-        <div class="brand-text">
-          <h1>ESARO WEB TV</h1>
-          <span>La prima Social TV • La guardi quando vuoi e dove vuoi tu</span>
-        </div>
+    <div class="header-inner">
+      <a href="#" class="logo-box" title="Esaro TV - Home">
+        <img 
+          src="Logo TV nuovo trasparente.png" 
+          onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" 
+          alt="Esaro TV Web">
       </a>
       <nav>
-        <a href="#diretta">Diretta 24/7</a>
-        <a href="#vetrina">Vetrina</a>
-        <a href="#articoli">Articoli &amp; Reportage</a>
-        <a href="#produzioni">Produzioni &amp; Contatti</a>
+        <a href="#diretta" class="btn-live-nav"><span class="pulse-dot"></span> IN ONDA H24</a>
+        <a href="#documentari">Documentari & Format</a>
+        <a href="#attualita">Attualità & Servizi</a>
+        <a href="#articoli">Articoli & Approfondimenti</a>
+        <a href="#produzioni">Spot & Pubblicità</a>
       </nav>
     </div>
   </header>
 
-  <!-- SEZIONE DIRETTA STREAMING -->
-  <section id="diretta" class="container live-section">
-    <span class="live-badge">● Streaming 24/7 • Canale Ufficiale</span>
-    <div class="live-box">
-      <div class="live-screen">
-        <img src="Logo TV nuovo trasparente.png" alt="Esaro Web TV" onerror="this.style.display='none'">
-        <h2>Esaro Web TV in Diretta</h2>
-        <p>Documentari, servizi giornalistici, eventi culturali, cronaca e approfondimenti dal territorio calabrese.</p>
-        <a href="https://www.youtube.com/@esarowebtv4409/live" target="_blank" rel="noopener" class="btn-primary">
-          ▶ Guarda la Diretta su YouTube
+  <!-- SCRITTA BIANCA IN ALTO + BANNER SOCIAL -->
+  <div class="top-banner-section">
+    <p class="top-claim">ESARO TV LA PRIMA SOCIAL TV, LA GUARDI QUANDO VUOI E DOVE VUOI TU</p>
+    <div class="top-banner-frame">
+      <a href="https://www.youtube.com/@esarowebtv4409" target="_blank" rel="noopener" title="Seguici sui nostri canali Social - Esaro Web TV">
+        <img 
+          src="Banner sito esarotv.png" 
+          onerror="this.onerror=null; this.src='Banner sito esarotv.jpg';" 
+          alt="Esaro TV, la prima Social TV - YouTube, Facebook, Instagram, TikTok, WhatsApp 3294122113">
+      </a>
+    </div>
+  </div>
+
+  <!-- FINESTRA CENTRALE PALINSESTO WEB TV (YOUTUBE LOOP) -->
+  <section id="diretta" class="hero-tv">
+    <div class="container">
+      <div class="tv-header">
+        <div>
+          <span class="tv-badge">● ESARO TV LIVE STREAMING</span>
+          <h1>In onda ora sul canale ufficiale</h1>
+        </div>
+        <a href="https://www.youtube.com/watch?v=9IgWJPnZ13s" target="_blank" rel="noopener" class="btn-primary">
+          Apri su YouTube ↗
         </a>
       </div>
-      <div class="live-info">
-        <h3>Informazione, Territorio e Cultura</h3>
-        <p>
-          Segui il palinsesto continuo di <strong>Esaro Web TV</strong>, rivedi i servizi andati in onda e scopri i format dedicati alla Calabria e alla Valle dell'Esaro.
-        </p>
-        <div class="channel-links">
-          <a href="https://www.youtube.com/@esarowebtv4409" target="_blank" rel="noopener" class="pill-link">YouTube @esarowebtv4409</a>
-          <a href="https://calabriaterramia.substack.com" target="_blank" rel="noopener" class="pill-link">Redazione Substack</a>
-          <a href="https://www.instagram.com/gennarogallofilmmaking/" target="_blank" rel="noopener" class="pill-link">Instagram</a>
-          <a href="https://www.tiktok.com/@erarowebtv" target="_blank" rel="noopener" class="pill-link">TikTok</a>
+
+      <div class="tv-frame-container">
+        <iframe 
+          src="https://www.youtube.com/embed/9IgWJPnZ13s?autoplay=1&mute=1&loop=1&playlist=9IgWJPnZ13s&rel=0" 
+          title="Esaro TV Diretta Streaming"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="tv-bar-bottom">
+        <div>
+          <strong style="color: var(--accent-cyan);">Palinsesto continuo Esaro TV:</strong>
+          <span style="color: var(--text-muted); font-size: 0.92rem;"> Documentari del territorio, inchieste, cultura, eventi e format televisivi.</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          🔊 Clicca sull'icona audio nel player per attivare il volume
         </div>
       </div>
     </div>
   </section>
 
-  <!-- VETRINA COMMERCIALE (4 SPAZI PARTNER) -->
-  <div id="vetrina" class="container ad-wrapper">
+  <!-- CAROSELLO 1: DOCUMENTARI & FORMAT TELEVISIVI -->
+  <section id="documentari" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Documentari & Format Televisivi</h2>
+        <p>Racconti, storie e approfondimenti firmati Esaro TV</p>
+      </div>
+    </div>
+    <div id="carousel-documentari" class="carousel-row"></div>
+  </section>
+
+  <!-- VETRINA COMMERCIALE (4 SPAZI PARTNER COMMERCIALI) -->
+  <div class="container ad-wrapper">
     <span class="ad-label">Vetrina Commerciale</span>
     <div class="ad-quad-grid">
       <!-- SPAZIO 1: BANNER ATTIVO -->
       <a href="#produzioni" class="ad-box-medium ad-active" title="Promuovi la tua attività su Esaro TV">
-        <img src="banner-mio-ridotto.jpg" alt="Gennaro Gallo Filmmaking - Esaro TV">
+        <img 
+          src="banner-mio-ridotto.jpg"
+          onerror="this.onerror=null; this.src='Banner sito piccolo mio .png';" 
+          alt="Partner Commerciale Esaro TV">
       </a>
 
       <!-- SPAZIO 2 -->
@@ -537,7 +645,7 @@
       <a href="#produzioni" class="ad-box-medium">
         <div class="ad-placeholder-text">
           <strong>Spazio Partner Commerciale 3</strong><br>
-          <small>Visibilità garantita su Esaro TV • Contattaci per info</small>
+          <small>Promuovi la tua attività commerciale o il tuo evento</small>
         </div>
       </a>
 
@@ -545,104 +653,219 @@
       <a href="#produzioni" class="ad-box-medium">
         <div class="ad-placeholder-text">
           <strong>Spazio Partner Commerciale 4</strong><br>
-          <small>Visibilità garantita su Esaro TV • Contattaci per info</small>
+          <small>Spazio disponibile • Contatta la redazione al 329 4122113</small>
         </div>
       </a>
     </div>
   </div>
 
-  <!-- ARTICOLI & APPROFONDIMENTI DA SUBSTACK -->
-  <section id="articoli" class="container section-block">
-    <div class="section-header">
+  <!-- CAROSELLO 2: ATTUALITÀ, VIDEOSERVIZI & EVENTI -->
+  <section id="attualita" class="container">
+    <div class="section-head">
       <div>
-        <h2>Articoli &amp; Approfondimenti</h2>
-        <p>Gli ultimi servizi e racconti pubblicati su Calabria Terra Mia</p>
+        <h2>Attualità, Videoservizi & Eventi</h2>
+        <p>Cronaca, territorio e reportage giornalistici</p>
       </div>
-      <a href="https://calabriaterramia.substack.com" target="_blank" rel="noopener" class="pill-link">
-        Vedi tutti gli articoli →
+    </div>
+    <div id="carousel-attualita" class="carousel-row"></div>
+  </section>
+
+  <!-- SEZIONE ARTICOLI & APPROFONDIMENTI (SUBSTACK CON FOTO DI ANTEPRIMA) -->
+  <section id="articoli" class="container">
+    <div class="section-head">
+      <div>
+        <h2>Articoli & Approfondimenti</h2>
+        <p>Servizi giornalistici, docufilm ed editoriali su Calabria Terra Mia (Substack)</p>
+      </div>
+      <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary">
+        Tutti gli articoli ↗
       </a>
     </div>
     <div id="substack-feed" class="articles-grid">
-      <div class="article-card">
-        <div class="article-body">
-          <span class="article-date">Aggiornamento in corso...</span>
-          <h3>Caricamento degli ultimi articoli da Calabria Terra Mia</h3>
-          <p>Visita la redazione online per leggere i reportage e guardare i videoservizi completi.</p>
-          <a href="https://calabriaterramia.substack.com" target="_blank" rel="noopener" class="read-more">Apri Substack →</a>
-        </div>
-      </div>
+      <p style="color: var(--text-muted);">Caricamento ultimi contenuti da Substack...</p>
     </div>
   </section>
 
-  <!-- PRODUZIONI VIDEO & CONTATTI -->
-  <section id="produzioni" class="container section-block">
+  <!-- SERVIZI PROFESSIONALI FILMMAKER & SPAZI PUBBLICITARI -->
+  <section id="produzioni" class="container">
     <div class="services-box">
       <div>
-        <span class="ad-label">Gennaro Gallo • Filmmaking &amp; Digital Marketing</span>
-        <h2>Dai visibilità al tuo Evento o alla tua Azienda</h2>
-        <ul class="services-list">
-          <li>Video &amp; Post-Produzione</li>
-          <li>Riprese Aeree &amp; Drone</li>
-          <li>Siti Web &amp; Social Marketing</li>
-          <li>Dirette Streaming Multicamera e Regia Mobile</li>
-          <li>Realizzazione di Format TV e Talk Show</li>
-          <li>Video Clip, Spot e Reels Promozionali</li>
-        </ul>
-        <div class="contact-actions">
-          <a href="https://wa.me/393294122113" target="_blank" rel="noopener" class="btn-whatsapp">
-            WhatsApp: +39 329 4122 113
+        <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.85rem; text-transform: uppercase;">Produzioni & Pubblicità</span>
+        <h2 style="font-size: 1.65rem; margin: 6px 0 12px;">Promuovi la tua attività su Esaro TV</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Dall'idea alla messa in onda: realizziamo contenuti audiovisivi su misura per aziende, enti, associazioni ed eventi, garantendo visibilità sia in TV che sul web.
+        </p>
+        <div class="services-list">
+          <div class="service-item">
+            <h4>🎬 Spot & Jingle Commerciali</h4>
+            <p>Ideazione, riprese professionali e jingle audio/video per promuovere la tua attività.</p>
+          </div>
+          <div class="service-item">
+            <h4>📺 Spazi Banner & Redazionali</h4>
+            <p>Visibilità sul portale esarotv.it e passaggi nel palinsesto giornaliero della Web TV.</p>
+          </div>
+          <div class="service-item">
+            <h4>🎥 Documentari & Eventi</h4>
+            <p>Copertura multicamera, format televisivi, dirette streaming e comunicazione sociale.</p>
+          </div>
+        </div>
+        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://wa.me/393294122113?text=Salve%2C%20vorrei%20informazioni%20per%20promuovere%20la%20mia%20attivit%C3%A0%20su%20Esaro%20TV" target="_blank" rel="noopener" class="btn-primary" style="background: #16a34a;">
+            💬 Scrivici su WhatsApp (329 4122113)
           </a>
-          <a href="mailto:animare@hotmail.it" class="btn-primary">
-            Email: animare@hotmail.it
+          <a href="mailto:info@esarotv.it?subject=Richiesta%20Informazioni%20Pubblicit%C3%A0%20e%20Produzioni" class="btn-primary">
+            ✉️ Invia un'Email
           </a>
         </div>
       </div>
+
       <div class="qr-card">
-        <img src="qr-code.png" alt="QR Code Esaro Web TV" onerror="this.style.display='none'">
-        <p>Inquadra il QR Code per condividere <strong>www.esarotv.it</strong> o contattarci direttamente.</p>
+        <img src="qr-code.png" alt="QR Code Esaro TV">
+        <span>Inquadra e porta Esaro TV sempre con te</span>
+        <small style="color: #64748b; font-size: 0.72rem;">www.esarotv.it</small>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <p><strong>Esaro Web TV</strong> • Produzioni Audiovisive &amp; Comunicazione — Partita I.V.A. 02627010784</p>
-      <p style="margin-top: 6px;">Tel / WhatsApp: +39 329 4122 113 • Email: animare@hotmail.it</p>
+    <div class="container footer-inner">
+      <div>
+        <strong style="color: #fff;">ESARO TV</strong> — Web TV, Informazione & Produzioni Audiovisive<br>
+        <span>Dominio ufficiale: www.esarotv.it • WhatsApp Redazione/Spot: 329 4122113</span>
+      </div>
+      <div style="display: flex; gap: 18px;">
+        <a href="https://www.youtube.com/watch?v=9IgWJPnZ13s" target="_blank">YouTube</a>
+        <a href="https://substack.com/@calabriaterramia" target="_blank">Substack</a>
+        <a href="#produzioni">Pubblicità</a>
+      </div>
     </div>
   </footer>
 
-  <!-- CARICAMENTO AUTOMATICO ARTICOLI SUBSTACK -->
+  <!-- =====================================================================
+       PANNELLO DI GESTIONE FACILE CAROSELLI VIDEO
+       ===================================================================== -->
   <script>
-    (function loadSubstackPosts() {
+    const VIDEO_DOCUMENTARI = [
+      {
+        youtubeId: "8VJ-7WxG1Cc",
+        categoria: "Documentario",
+        titolo: "Documentario — Racconti, storia e identità del territorio"
+      },
+      {
+        youtubeId: "cOcFOhOZ1kU",
+        categoria: "Format TV",
+        titolo: "Format TV — Approfondimenti, ospiti e cultura"
+      },
+      {
+        youtubeId: "H-2lMK_nv1s",
+        categoria: "Comunicazione Sociale",
+        titolo: "Comunicazione Sociale — Storie di comunità e inclusione"
+      }
+    ];
+
+    const VIDEO_ATTUALITA = [
+      {
+        youtubeId: "Lu-HcxI4WyA",
+        categoria: "Attualità",
+        titolo: "Attualità — Videoservizio e cronaca dal territorio"
+      },
+      {
+        youtubeId: "lkq_mSUg81Q",
+        categoria: "Eventi",
+        titolo: "Eventi — Le immagini e i protagonisti degli appuntamenti"
+      },
+      {
+        youtubeId: "cTWUy0lGRoY",
+        categoria: "Spot e Promo",
+        titolo: "Spot e Promo — Produzioni commerciali e promozione attività"
+      }
+    ];
+
+    function renderVideos(lista, containerId) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = lista.map(v => `
+        <a href="https://youtu.be/${v.youtubeId}" target="_blank" rel="noopener" class="video-card">
+          <div class="thumb-box">
+            <img 
+              src="https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg" 
+              onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg';"
+              alt="${v.titolo}">
+            <span class="cat-tag">${v.categoria}</span>
+            <div class="play-overlay"><div class="play-circle">▶</div></div>
+          </div>
+          <div class="video-info">
+            <h3>${v.titolo}</h3>
+            <span class="video-meta">Guarda su YouTube ↗</span>
+          </div>
+        </a>
+      `).join('');
+    }
+    renderVideos(VIDEO_DOCUMENTARI, 'carousel-documentari');
+    renderVideos(VIDEO_ATTUALITA, 'carousel-attualita');
+
+    async function loadSubstackArticles() {
       const container = document.getElementById('substack-feed');
-      const feedUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
-      fetch('https://api.rss2json.com/v1/api.json?rss_url=' + feedUrl)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.items || !data.items.length) return;
-          container.innerHTML = data.items.slice(0, 6).map(item => {
-            const imgMatch = (item.description || '').match(/<img[^>]+src="([^">]+)"/);
-            const thumb = item.thumbnail || (imgMatch ? imgMatch[1] : 'banner-mio-ridotto.jpg');
-            const cleanText = (item.description || '').replace(/<[^>]*>?/gm, '').trim().slice(0, 135) + '...';
-            const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', {
-              day: '2-digit', month: 'short', year: 'numeric'
-            });
+      const rssUrl = encodeURIComponent('https://calabriaterramia.substack.com/feed');
+      try {
+        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&t=${Date.now()}`);
+        const data = await res.json();
+        if (data.status === 'ok' && data.items && data.items.length > 0) {
+          const articles = data.items.slice(0, 6);
+          container.innerHTML = articles.map(item => {
+            const fullHtml = (item.content || "") + " " + (item.description || "");
+            let imgUrl = "";
+
+            const imgMatches = [...fullHtml.matchAll(/<img[^>]+src="([^">]+)"/g)].map(m => m[1]);
+            const candidates = [
+              ...imgMatches,
+              item.thumbnail,
+              item.enclosure && item.enclosure.link
+            ].filter(Boolean);
+
+            for (const url of candidates) {
+              if (!url.includes('.m3u8') && !url.includes('.mp4') && !url.includes('/video/')) {
+                imgUrl = url;
+                break;
+              }
+            }
+
+            const cleanText = item.description.replace(/<[^>]*>?/gm, '').trim().substring(0, 130) + '...';
+            const dateStr = new Date(item.pubDate).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+
             return `
               <article class="article-card">
-                <img src="${thumb}" alt="${item.title}" onerror="this.src='banner-mio-ridotto.jpg'">
+                <a href="${item.link}" target="_blank" rel="noopener" class="article-thumb">
+                  <img 
+                    src="${imgUrl || 'Logo TV nuovo trasparente.png'}" 
+                    onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg'; this.style.objectFit='contain'; this.style.padding='20px';"
+                    alt="${item.title}">
+                </a>
                 <div class="article-body">
-                  <span class="article-date">${dateStr}</span>
-                  <h3>${item.title}</h3>
-                  <p>${cleanText}</p>
-                  <a href="${item.link}" target="_blank" rel="noopener" class="read-more">Leggi l'articolo →</a>
+                  <div>
+                    <div class="article-date">${dateStr}</div>
+                    <h3><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></h3>
+                    <p class="article-excerpt">${cleanText}</p>
+                  </div>
+                  <a href="${item.link}" target="_blank" rel="noopener" class="read-link">Leggi / Guarda su Substack →</a>
                 </div>
               </article>
             `;
           }).join('');
-        })
-        .catch(() => {});
-    })();
+        } else {
+          throw new Error('Nessun articolo trovato');
+        }
+      } catch (e) {
+        container.innerHTML = `
+          <div class="article-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
+            <h3>Leggi tutti gli articoli e gli approfondimenti su Substack</h3>
+            <p class="article-excerpt">Visita la pagina ufficiale Calabria Terra Mia per scoprire gli ultimi editoriali e servizi giornalistici.</p>
+            <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" class="btn-primary" style="margin: 0 auto;">Vai a Substack ↗</a>
+          </div>
+        `;
+      }
+    }
+    loadSubstackArticles();
   </script>
 </body>
 </html>
