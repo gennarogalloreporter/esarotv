@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="it">
-<!-- Open Graph / Anteprima WhatsApp e Social -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.esarotv.it/">
-<meta property="og:title" content="Esaro Web TV - La voce del territorio calabrese">
-<meta property="og:description" content="Diretta streaming 24/7, servizi giornalistici, documentari, eventi e approfondimenti dalla Calabria.">
-<meta property="og:image" content="https://www.esarotv.it/banner-mio-ridotto.jpg">
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Esaro TV — Web TV, Documentari, Attualità & Produzioni Video</title>
+  <title>Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video</title>
   <meta name="description" content="Esaro TV: la prima Social TV, la guardi quando vuoi e dove vuoi tu. Documentari, videoservizi giornalistici, approfondimenti e produzioni video." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://www.esarotv.it/" />
+
+  <!-- Open Graph / Anteprima WhatsApp e Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Esaro Web TV" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:url" content="https://www.esarotv.it/" />
+  <meta property="og:title" content="Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video" />
+  <meta property="og:description" content="Diretta streaming 24/7, servizi giornalistici, documentari, eventi e approfondimenti dalla Calabria." />
+  <meta property="og:image" content="https://www.esarotv.it/banner-mio-ridotto.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+
+  <!-- Configurazione App Mobile (PWA) -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#09131d" />
+  <link rel="apple-touch-icon" href="icona-app.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Esaro TV" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-main: #060911;
@@ -38,13 +52,6 @@
 
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
     /* HEADER CON LOGO IN GRANDE RISALTO A SINISTRA */
     header {
       background: linear-gradient(90deg, #0b1326 0%, #050811 55%, #000000 100%);
@@ -869,6 +876,12 @@
       }
     }
     loadSubstackArticles();
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
   </script>
 </body>
 </html>
