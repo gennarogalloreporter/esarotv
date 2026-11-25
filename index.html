@@ -75,7 +75,7 @@
       padding: 10px 20px;
       max-width: 1280px;
       margin: 0 auto;
-      gap: 20px;
+      gap: 16px;
     }
     .logo-box {
       display: flex;
@@ -94,13 +94,19 @@
       transform: scale(1.03);
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
     nav {
       display: flex;
-      gap: 22px;
+      gap: 20px;
       align-items: center;
     }
     nav a {
-      font-size: 0.94rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: #cbd5e1;
       transition: color 0.2s;
@@ -110,13 +116,14 @@
       background: rgba(239, 68, 68, 0.18);
       border: 1px solid var(--live-red);
       color: #fecaca !important;
-      padding: 7px 15px;
+      padding: 7px 14px;
       border-radius: 99px;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
+      white-space: nowrap;
     }
     .pulse-dot {
       width: 8px;
@@ -129,6 +136,80 @@
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
       70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* PULSANTE INSTALLA APP NELLA BARRA SUPERIORE */
+    .btn-install-app {
+      background: linear-gradient(135deg, #1d63dc 0%, #0284c7 100%);
+      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.65);
+      padding: 8px 15px;
+      border-radius: 99px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(29, 99, 220, 0.45);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-install-app:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+
+    /* FINESTRA GUIDA INSTALLAZIONE (IPHONE / BROWSER INTERNI) */
+    .install-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 6, 14, 0.82);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .install-modal-backdrop.open {
+      display: flex;
+    }
+    .install-modal-card {
+      background: var(--bg-card);
+      border: 1px solid #2b406b;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.75);
+      text-align: left;
+    }
+    .install-modal-card h3 {
+      font-size: 1.2rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .install-modal-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .install-step-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+    }
+    .install-step-box strong {
+      color: var(--accent-cyan);
     }
 
     /* CLAIM BIANCO IN ALTO + BANNER SOCIAL */
@@ -290,6 +371,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      border: none;
+      cursor: pointer;
       transition: background 0.2s;
     }
     .btn-primary:hover { background: #2563eb; }
@@ -542,13 +625,17 @@
       gap: 20px;
     }
 
+    @media (max-width: 1060px) {
+      nav { display: none; }
+    }
+
     @media (max-width: 960px) {
       .articles-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 820px) {
-      nav { display: none; }
-      .logo-box img { height: 68px; }
+      .logo-box img { height: 64px; }
+      .btn-install-app { padding: 7px 12px; font-size: 0.8rem; }
       .top-claim { font-size: 1.25rem; }
       .ad-quad-grid { grid-template-columns: 1fr; }
       .services-box { grid-template-columns: 1fr; }
@@ -558,7 +645,7 @@
 </head>
 <body>
 
-  <!-- INTESTAZIONE CON LOGO IN EVIDENZA A SINISTRA -->
+  <!-- INTESTAZIONE CON LOGO IN EVIDENZA A SINISTRA E PULSANTE APP -->
   <header>
     <div class="header-inner">
       <a href="#" class="logo-box" title="Esaro TV - Home">
@@ -567,15 +654,42 @@
           onerror="this.onerror=null; this.src='Logo TV nuovo trasparente.jpg';" 
           alt="Esaro TV Web">
       </a>
-      <nav>
-        <a href="#diretta" class="btn-live-nav"><span class="pulse-dot"></span> IN ONDA H24</a>
-        <a href="#documentari">Documentari &amp; Format</a>
-        <a href="#attualita">Attualità &amp; Servizi</a>
-        <a href="#articoli">Articoli &amp; Approfondimenti</a>
-        <a href="#produzioni">Spot &amp; Pubblicità</a>
-      </nav>
+      <div class="header-right">
+        <nav>
+          <a href="#diretta" class="btn-live-nav"><span class="pulse-dot"></span> IN ONDA H24</a>
+          <a href="#documentari">Documentari &amp; Format</a>
+          <a href="#attualita">Attualità &amp; Servizi</a>
+          <a href="#articoli">Articoli &amp; Approfondimenti</a>
+          <a href="#produzioni">Spot &amp; Pubblicità</a>
+        </nav>
+        <button id="btn-install-app" class="btn-install-app" type="button" title="Installa l'App di Esaro TV sul tuo dispositivo">
+          📲 Installa App
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- FINESTRA ISTRUZIONI INSTALLAZIONE APP (PER IPHONE E BROWSER INTERNI) -->
+  <div id="install-modal" class="install-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+    <div class="install-modal-card">
+      <h3 id="install-modal-title">📲 Installa l'App Esaro TV</h3>
+      <p>Porta Esaro Web TV direttamente sulla schermata Home del tuo telefono in due secondi:</p>
+      <div id="install-step-android" class="install-step-box">
+        <strong>Su Android (Google Chrome):</strong><br>
+        Tocca i <strong>3 puntini (⋮)</strong> in alto a destra nel browser e seleziona <strong>"Installa app"</strong> oppure <strong>"Aggiungi a schermata Home"</strong>.
+      </div>
+      <div id="install-step-ios" class="install-step-box">
+        <strong>Su iPhone / iPad (Safari):</strong><br>
+        Tocca l'icona <strong>Condividi</strong> (quadrato con freccia in alto) nella barra in basso e scegli <strong>"Aggiungi alla schermata Home"</strong>.
+      </div>
+      <p style="font-size: 0.8rem; margin-bottom: 16px;">
+        <em>Nota: se hai aperto il link dentro WhatsApp o Facebook, tocca prima i 3 puntini e scegli "Apri nel browser" (Chrome o Safari).</em>
+      </p>
+      <button id="btn-close-install-modal" type="button" class="btn-primary" style="width: 100%; justify-content: center;">
+        Ho capito
+      </button>
+    </div>
+  </div>
 
   <!-- SCRITTA BIANCA IN ALTO + BANNER SOCIAL -->
   <div class="top-banner-section">
@@ -760,7 +874,7 @@
   </footer>
 
   <!-- =====================================================================
-       PANNELLO DI GESTIONE FACILE CAROSELLI VIDEO
+       PANNELLO DI GESTIONE FACILE CAROSELLI VIDEO E INSTALLAZIONE APP
        ===================================================================== -->
   <script>
     const VIDEO_DOCUMENTARI = [
@@ -884,11 +998,56 @@
     }
     loadSubstackArticles();
 
+    /* GESTIONE PULSANTE INSTALLA APP (PWA) */
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js');
       });
     }
+
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('btn-install-app');
+    const installModal = document.getElementById('install-modal');
+    const closeInstallModalBtn = document.getElementById('btn-close-install-modal');
+
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone && installBtn) {
+      installBtn.style.display = 'none';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          await deferredPrompt.userChoice;
+          deferredPrompt = null;
+        } else if (installModal) {
+          installModal.classList.add('open');
+        }
+      });
+    }
+
+    if (closeInstallModalBtn && installModal) {
+      closeInstallModalBtn.addEventListener('click', () => {
+        installModal.classList.remove('open');
+      });
+      installModal.addEventListener('click', (e) => {
+        if (e.target === installModal) {
+          installModal.classList.remove('open');
+        }
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      if (installBtn) installBtn.style.display = 'none';
+      if (installModal) installModal.classList.remove('open');
+      deferredPrompt = null;
+    });
   </script>
 </body>
 </html>
