@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Esaro TV — Web TV, Documentari, Attualità &amp; Produzioni Video</title>
-  <meta name="description" content="Esaro TV, la prima Social TV: la guardi quando vuoi e dove vuoi tu!. Documentari, videoservizi giornalistici, approfondimenti e produzioni video." />
+  <meta name="description" content="Esaro TV: la prima Social TV, la guardi quando vuoi e dove vuoi tu. Documentari, videoservizi giornalistici, approfondimenti e produzioni video." />
   <link rel="canonical" href="https://www.esarotv.it/" />
 
   <!-- Open Graph / Anteprima WhatsApp e Social -->
@@ -59,7 +59,7 @@
       padding: 0 20px;
     }
 
-    /* HEADER CON LOGO IN GRANDE RISALTO A SINISTRA */
+    /* HEADER CON LOGO IN GRANDE RISALTO A SINISTRA (INGRANDITO E ALONE BIANCO) */
     header {
       background: linear-gradient(90deg, #0b1326 0%, #050811 55%, #000000 100%);
       border-bottom: 1px solid #243456;
@@ -72,7 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
+      padding: 12px 20px;
       max-width: 1280px;
       margin: 0 auto;
       gap: 16px;
@@ -84,14 +84,20 @@
       padding: 4px 12px 4px 0;
     }
     .logo-box img {
-      height: 86px;
+      height: 112px; /* Ingrandito rispetto agli 86px precedenti */
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
-      transition: transform 0.25s ease;
+      /* Alone bianco diffuso e leggero combinato con bagliore ciano per massimo risalto */
+      filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.45)) 
+              drop-shadow(0 0 4px rgba(255, 255, 255, 0.35))
+              drop-shadow(0 0 12px rgba(56, 189, 248, 0.35));
+      transition: transform 0.25s ease, filter 0.25s ease;
     }
     .logo-box:hover img {
-      transform: scale(1.03);
+      transform: scale(1.04);
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.55)) 
+              drop-shadow(0 0 6px rgba(255, 255, 255, 0.45))
+              drop-shadow(0 0 14px rgba(56, 189, 248, 0.45));
     }
 
     .header-right {
@@ -615,14 +621,30 @@
       padding: 36px 0;
       margin-top: 40px;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
     }
     .footer-inner {
       display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-top {
+      display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
       gap: 20px;
+      border-bottom: 1px solid rgba(30, 41, 66, 0.5);
+      padding-bottom: 16px;
+    }
+    .footer-tax-info {
+      font-size: 0.78rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
     }
 
     @media (max-width: 1060px) {
@@ -634,18 +656,19 @@
     }
 
     @media (max-width: 820px) {
-      .logo-box img { height: 64px; }
+      .logo-box img { height: 86px; } /* Proporzione su schermi piccoli */
       .btn-install-app { padding: 7px 12px; font-size: 0.8rem; }
       .top-claim { font-size: 1.25rem; }
       .ad-quad-grid { grid-template-columns: 1fr; }
       .services-box { grid-template-columns: 1fr; }
       .tv-header h1 { font-size: 1.35rem; }
+      .footer-top { flex-direction: column; gap: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- INTESTAZIONE CON LOGO IN EVIDENZA A SINISTRA E PULSANTE APP -->
+  <!-- INTESTAZIONE CON LOGO IN EVIDENZA A SINISTRA (INGRANDITO E CON ALONE BIANCO) -->
   <header>
     <div class="header-inner">
       <a href="#" class="logo-box" title="Esaro TV - Home">
@@ -691,7 +714,7 @@
     </div>
   </div>
 
-  <!-- SCRITTA BIANCA IN ALTO + BANNER SOCIAL -->
+  <!-- SCRITTA BIANCA IN ALTO (AGGIORNATA) + BANNER SOCIAL -->
   <div class="top-banner-section">
     <p class="top-claim">ESARO TV, LA PRIMA SOCIAL TV: LA GUARDI QUANDO VUOI E DOVE VUOI TU!</p>
     <div class="top-banner-frame">
@@ -752,11 +775,11 @@
     <div id="carousel-documentari" class="carousel-row"></div>
   </section>
 
-  <!-- VETRINA COMMERCIALE (4 SPAZI PARTNER COMMERCIALI) -->
+  <!-- VETRINA COMMERCIALE -->
   <div class="container ad-wrapper">
     <span class="ad-label">Vetrina Commerciale</span>
     <div class="ad-quad-grid">
-      <!-- SPAZIO 1: BANNER ATTIVO -->
+      <!-- SPAZIO 1 -->
       <a href="#produzioni" class="ad-box-medium ad-active" title="Promuovi la tua attività su Esaro TV">
         <img 
           src="banner-mio-ridotto.jpg"
@@ -766,18 +789,24 @@
 
       <!-- SPAZIO 2 -->
       <a href="#produzioni" class="ad-box-medium ad-active" title="Realizza la tua Social TV personalizzata con Animare">
-  <img src="banner-social-tv.png" alt="Realizza la tua Social TV personalizzata - Animare by Gennaro Gallo">
-</a>
+        <img 
+          src="banner-social-tv.jpg" 
+          alt="Realizza la tua Social TV personalizzata - Animare by Gennaro Gallo">
+      </a>
 
       <!-- SPAZIO 3 -->
-     <a href="#produzioni" class="ad-box-medium ad-active" title="Format TV, Videoclip, Spot e Giornalismo con Animare">
-  <img src="regiamobile.png" alt="Realizzazione Format TV, Spot, Videoclip e Giornalismo - Animare">
-</a>
+      <a href="#produzioni" class="ad-box-medium ad-active" title="Video, Post-Produzione & Dirette Streaming Multicamera con Animare">
+        <img 
+          src="banner-streaming-multicamera.jpg" 
+          alt="Servizi Video, Regia Mobile e Streaming Multicamera - Animare">
+      </a>
 
       <!-- SPAZIO 4 -->
-     <a href="#produzioni" class="ad-box-medium ad-active" title="Format TV, Videoclip, Spot e Giornalismo con Animare">
-  <img src="banner-format-giornalismo.jpg" alt="Realizzazione Format TV, Spot, Videoclip e Giornalismo - Animare">
-</a>
+      <a href="#produzioni" class="ad-box-medium ad-active" title="Format TV, Videoclip, Spot e Giornalismo con Animare">
+        <img 
+          src="banner-format-giornalismo.jpg" 
+          alt="Realizzazione Format TV, Spot, Videoclip e Giornalismo - Animare">
+      </a>
     </div>
   </div>
 
@@ -792,7 +821,7 @@
     <div id="carousel-attualita" class="carousel-row"></div>
   </section>
 
-  <!-- SEZIONE ARTICOLI & APPROFONDIMENTI (SUBSTACK CON FOTO DI ANTEPRIMA) -->
+  <!-- SEZIONE ARTICOLI & APPROFONDIMENTI (SUBSTACK) -->
   <section id="articoli" class="container">
     <div class="section-head">
       <div>
@@ -849,24 +878,29 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER AGGIORNATO CON INFORMAZIONI FISCALI E AZIENDALI COMPLETE -->
   <footer>
     <div class="container footer-inner">
-      <div>
-        <strong style="color: #fff;">ESARO TV</strong> — Web TV, Informazione &amp; Produzioni Audiovisive<br>
-        <span>Dominio ufficiale: www.esarotv.it • WhatsApp Redazione/Spot: 329 4122113</span>
-      </div>
-      <div style="display: flex; gap: 18px;">
-        <a href="https://www.youtube.com/@esarowebtv4409" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener">Substack</a>
-        <a href="#produzioni">Pubblicità</a>
+      <div class="footer-top">
+        <div>
+          <strong style="color: #fff; font-size: 0.95rem;">ANIMARE by Gennaro Gallo - ESARO TV</strong> — Social TV, Informazione &amp; Produzioni Audiovisive<br>
+          <div class="footer-tax-info" style="margin-top: 6px;">
+            Piazza A. Splendore 3, 87013 Fagnano Castello (CS) • P.IVA IT02627010784 • C. Univoco N92GLON • Cod. Ateco: 903909 • PEC: gennarogallo@pecgiornalisti.it
+          </div>
+          <span style="display: inline-block; margin-top: 6px; font-weight: 500;">
+            Dominio ufficiale: www.esarotv.it • WhatsApp Redazione/Spot: 329 4122113
+          </span>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.youtube.com/@esarowebtv4409" target="_blank" rel="noopener" style="color: #cbd5e1; hover: color: var(--accent-cyan);">YouTube</a>
+          <a href="https://substack.com/@calabriaterramia" target="_blank" rel="noopener" style="color: #cbd5e1; hover: color: var(--accent-cyan);">Substack</a>
+          <a href="#produzioni" style="color: #cbd5e1; hover: color: var(--accent-cyan);">Pubblicità</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- =====================================================================
-       PANNELLO DI GESTIONE FACILE CAROSELLI VIDEO E INSTALLAZIONE APP
-       ===================================================================== -->
+  <!-- PANNELLO DI GESTIONE CAROSELLI VIDEO E INSTALLAZIONE APP -->
   <script>
     const VIDEO_DOCUMENTARI = [
       {
